@@ -15,9 +15,9 @@ export const INGREDIENT_GROUPS = {
 export const text = value => String(value ?? '').replace(/\\r\\n|\\n|\\r/g,'\n').replace(/\r\n?/g,'\n');
 export const fold = value => text(value).toLocaleLowerCase('de').replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 export function categories(value) {
-  if(Array.isArray(value)) return value.map(fold);
+  if(Array.isArray(value)) return value.map(x=>fold(text(x).trim())).filter(Boolean);
   const s=String(value??'').trim();
-  try { const v=JSON.parse(s); if(Array.isArray(v)) return v.map(fold); } catch {}
+  try { const v=JSON.parse(s); if(Array.isArray(v)) return categories(v); } catch {}
   return s.replace(/[{}[\]"]/g,'').split(',').map(x=>fold(x.trim())).filter(Boolean);
 }
 export function meals(recipe) {
@@ -33,7 +33,7 @@ export function matches(recipe,query='',filter='all',favorites=[]) {
   const cats=categories(recipe.category);
   if(filter==='favorites'&&!favorites.map(String).includes(String(recipe.id))) return false;
   if(filter==='airfryer'&&!recipe.airfryer&&!recipe.airfryer_step) return false;
-  if(filter==='highprotein'&&Number(recipe.prot)<25) return false;
+  if(filter==='highprotein'&&(!Number.isFinite(Number(recipe.prot))||Number(recipe.prot)<25)) return false;
   if(filter==='lowcarb'&&!cats.includes('lowcarb')) return false;
   if(filter in MEALS&&!meals(recipe).includes(filter)) return false;
   const haystack=fold([recipe.title,recipe.ingredients,recipe.zutaten_liste,recipe.prep,recipe.stove_step,recipe.oven_step,recipe.airfryer_step,recipe.description,recipe.tipps].join(' '));
@@ -43,6 +43,8 @@ const fractions={'½':.5,'¼':.25,'¾':.75,'⅓':1/3,'⅔':2/3,'⅛':.125,'⅜':
 export function quantity(value) {
   const s=value.trim();
   if(s in fractions) return fractions[s];
+  const compact=s.match(/^(\d+)([½¼¾⅓⅔⅛⅜⅝⅞])$/);
+  if(compact) return Number(compact[1])+fractions[compact[2]];
   const mixed=s.match(/^(\d+)\s+(.+)$/);
   if(mixed) return Number(mixed[1])+quantity(mixed[2]);
   if(s.includes('/')) { const [a,b]=s.split('/').map(Number); return b>0?a/b:NaN; }
@@ -51,7 +53,7 @@ export function quantity(value) {
 export const format = value => Number(value).toLocaleString('de-DE',{maximumFractionDigits:2});
 export function scaleLine(line,multiplier=1) {
   const clean=text(line).replace(/^\s*[•*\-]\s*/, '').trim();
-  const number='(?:\\d+\\s+(?:\\d+\\/\\d+|[½¼¾⅓⅔⅛⅜⅝⅞])|\\d+\\/\\d+|\\d+(?:[.,]\\d+)*|[½¼¾⅓⅔⅛⅜⅝⅞])';
+  const number='(?:\\d+\\s+(?:\\d+\\/\\d+|[½¼¾⅓⅔⅛⅜⅝⅞])|\\d+[½¼¾⅓⅔⅛⅜⅝⅞]|\\d+\\/\\d+|\\d+(?:[.,]\\d+)*|[½¼¾⅓⅔⅛⅜⅝⅞])';
   const re=new RegExp(`^((?:ca\\.\\s*|etwa\\s*|Saft von\\s*)?)(${number})(?:\\s*([–—-])\\s*(${number}))?`, 'i');
   return clean.replace(re,(_,prefix,a,dash,b)=>prefix+format(quantity(a)*multiplier)+(b?`–${format(quantity(b)*multiplier)}`:''));
 }
@@ -69,6 +71,8 @@ export function cycleInfo(start,length=28,now=new Date()) {
   const n=Number(length);
   if(!/^\d{4}-\d{2}-\d{2}$/.test(start)||!Number.isInteger(n)||n<18||n>45) return null;
   const [y,m,d]=start.split('-').map(Number), from=Date.UTC(y,m-1,d), today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
+  const date=new Date(from);
+  if(date.getUTCFullYear()!==y||date.getUTCMonth()!==m-1||date.getUTCDate()!==d) return null;
   const delta=Math.round((today-from)/86400000); if(delta<0) return null;
   const day=delta%n+1, ovulation=Math.max(8,n-14);
   if(day<=5) return {day,name:'Menstruation',hint:'Wärmende Mahlzeiten und eisenreiche Zutaten können jetzt gut passen.',query:'spinat',icon:'◒'};
@@ -82,9 +86,12 @@ export function importRows(input) {
   if(!Array.isArray(list)||!list.length||list.length>1000) throw Error('Bitte ein Backup mit 1 bis 1.000 Rezepten auswählen.');
   const seen=new Set();
   return list.map(r=>{
-    if(!r||typeof r!=='object'||typeof r.title!=='string'||!r.title.trim()||r.title.length>300) throw Error('Jedes Rezept benötigt einen gültigen Titel.');
-    if(seen.has(fold(r.title))) throw Error('Doppelte Rezepttitel im Backup.'); seen.add(fold(r.title));
+    if(!r||typeof r!=='object'||typeof r.title!=='string') throw Error('Jedes Rezept benötigt einen gültigen Titel.');
+    const title=r.title.trim();
+    if(!title||title.length>300) throw Error('Jedes Rezept benötigt einen gültigen Titel.');
+    if(seen.has(fold(title))) throw Error('Doppelte Rezepttitel im Backup.'); seen.add(fold(title));
     const row=Object.fromEntries(FIELDS.filter(k=>r[k]!==undefined).map(k=>[k,r[k]]));
+    row.title=title;
     if(r.id!==undefined){ if(!Number.isSafeInteger(Number(r.id))||Number(r.id)<1) throw Error('Ungültige Rezept-ID.'); row.id=Number(r.id); }
     row.category=JSON.stringify(categories(r.category));
     for(const [a,b] of Object.entries({zutatenListe:'zutaten_liste',stoveStep:'stove_step',ovenStep:'oven_step',airfryerStep:'airfryer_step',docCheck:'doc_check'})) if(row[b]===undefined&&r[a]!==undefined) row[b]=r[a];

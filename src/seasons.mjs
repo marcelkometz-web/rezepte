@@ -3,10 +3,13 @@ export function currentSeason(date=new Date()){const m=date.getMonth()+1;return 
 // 24 different sayings per season × 15 minutes = a six-hour cycle.
 export function seasonalSaying(season,time=Date.now()){const list=SAYINGS[season]||SAYINGS[currentSeason()];return list[Math.floor(time/900000)%list.length];}
 export function nextSaying(season,now,previous={}){
- if(!SAYINGS[season])season=currentSeason(new Date(now));
- const known=id=>{const [s,n]=String(id).split(':');return SAYINGS[s]?.[Number(n)];};
- const history=(Array.isArray(previous.history)?previous.history:[]).filter(x=>known(x.id)&&Number.isFinite(x.at)&&x.at<=now&&now-x.at<21600000);
- const current=previous.current;
+ if(!Object.hasOwn(SAYINGS,season))season=currentSeason(new Date(now));
+ previous=previous&&typeof previous==='object'?previous:{};
+ const known=id=>{if(typeof id!=='string'||!/^(?:spring|summer|autumn|winter):(?:0|[1-9]\d*)$/.test(id))return;const [s,n]=id.split(':');return SAYINGS[s][Number(n)];};
+ const valid=item=>item&&typeof item==='object'&&known(item.id)&&Number.isFinite(item.at)&&item.at<=now;
+ const history=(Array.isArray(previous.history)?previous.history:[]).filter(x=>valid(x)&&now-x.at<21600000).map(({id,at})=>({id,at}));
+ const current=valid(previous.current)?{id:previous.current.id,at:previous.current.at}:null;
+ if(current&&now-current.at<21600000&&!history.some(x=>x.id===current.id))history.push(current);
  if(current&&known(current.id)&&current.id.startsWith(season+':')&&now-current.at>=0&&now-current.at<900000)return {text:known(current.id),state:{current,history}};
  const used=new Set(history.map(x=>x.id)),offset=Math.floor(now/900000)%SAYINGS[season].length;
  for(let i=0;i<SAYINGS[season].length;i++){
