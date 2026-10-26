@@ -7,3 +7,11 @@ config.js
 # OS-spezifische Dateien (Mac/Windows unsichtbare Dateien)
 .DS_Store
 Thumbs.db
+
+# Lokale Zugangsdaten und Testartefakte
+.env
+.env.*
+!.env.example
+supabase/.temp/
+test-results/
+playwright-report/

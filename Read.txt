@@ -1,144 +1,318 @@
-========================================================================
-🥗 REZEPTE – ERNÄHRUNGS- & REZEPTE-APP
-DOKUMENTATION & VOLLSTÄNDIGE BEDIENUNGSANLEITUNG
-========================================================================
-Entwickelt von: Marcel Kometz
-Version: 3.5 (Smart Low-Carb & High-Protein Edition | Stand: Oktober 2026)
+REZEPTE – BEDIENHILFE
+Version 4 · Stand: 26. Oktober 2026
 
+Privates Familienprojekt von Marcel Kometz für Ramona und Marcel.
+Rezepte: https://marcelkometz-web.github.io/rezepte/
+Garten:  https://marcelkometz-web.github.io/newgarten/
+Impressum: https://marcelkometz-web.github.io/rezepte/impressum.html
+Kontakt: marcelkometz@icloud.com
 
-1. ÜBER DIESE APP
-------------------------------------------------------------------------
-"Rezepte" ist eine hochgradig spezialisierte, mobile Web-App
-für Smartphone, Tablet und PC zur Förderung von Vitalität, gesunder 
-Gewichtsreduktion und maximaler Blutzucker-Stabilität. 
+1. ANMELDUNG UND FREIGABE
+Garten und Rezepte verwenden dieselben persönlichen Konten. Wer bereits ein
+Garten-Konto hat, meldet sich mit derselben E-Mail-Adresse und demselben
+Passwort an. Zwischen den Apps im selben Tab über die gegenseitigen Links
+wechseln. In den Links stehen keine Passwörter oder Sitzungstokens.
 
-Entwickelt für den familiären Alltag von Ramona und Marcel, kombiniert die 
-Plattform eine datenbankgestützte Rezeptverwaltung (über 260 Rezepte), 
-ein zyklusbasiertes Ernährungssystem für Frauen, Echtzeit-Notizlisten 
-sowie einen KI-gestützten 3-Sterne-Küchenchef mit Live-Google-Websuche.
+Neue Personen erstellen zunächst ein Konto und bestätigen ihre E-Mail.
+Anschließend muss der Betreiber sie für euren Familienbereich freischalten.
+Keine neue eigene Familie in der Garten-App anlegen, wenn ihr zur bestehenden
+Familie gehören möchtet. Eine Registrierung allein gibt keinen Zugriff auf
+eure Rezepte, Einkaufsliste oder das Familienforum.
 
+Bestätigungs- und Wiederherstellungslinks führen zur gemeinsamen Garten-App.
+Öffne sie im selben Browser, lege bei einer Einladung dein eigenes Passwort
+fest und wechsle anschließend über „Zu den Rezepten“ zurück.
 
-2. HAUPTFUNKTIONEN & SYSTEM-MODULE
-------------------------------------------------------------------------
+Die Anmeldung wird im Sitzungsspeicher des Tabs verwaltet. Auf gemeinsam
+genutzten Geräten immer ausdrücklich abmelden. Nach einer Passwortänderung
+oder abgelaufenen Sitzung erneut anmelden. Die App liest euer Passwort nicht
+aus der Datenbank zurück und speichert es nicht als Klartext im Browser.
 
-• 🔍 Intelligente Kombinations-Suche & Reste-Radar:
-  - Volltext- und Schlagwortsuche über Titel, Zutaten und Zubereitung.
-  - Kombinationsfilter: Gib z. B. "Hähnchen Brokkoli" ein, um sofort 
-    Rezepte zu finden, die beide Zutaten enthalten.
-  - Schnellauswahl-Chips:
-    🥩 Fleisch & Fisch | 🥦 Gemüse | 🧀 Proteine & Milch | 🧄 Basics
-  - Sofortiges Leeren der Suche über das "✖"-Symbol im Suchfeld.
+2. GEMEINSAME INHALTE UND RECHTE
+Alle freigeschalteten Familienmitglieder sehen dieselbe Rezeptsammlung und
+dieselbe Einkaufsliste. Neue Konten sehen diese Daten erst nach der Freigabe.
+Die Familienverwaltung kann Rezepte bearbeiten. Weitere Mitglieder benötigen
+dafür eine zusätzliche Rezept-Bearbeitungsfreigabe.
 
-• 👥 Dynamische Portionsskalierung (1 bis 20 Portionen):
-  - Jedes Rezept lässt sich mit einem Tipp auf [+] oder [-] anpassen.
-  - Sämtliche Mengenangaben in der Zutatenliste (Gramm, Milliliter, 
-    Esslöffel, Stück) werden mathematisch exakt in Echtzeit umgerechnet.
-  - Makronährwerte (Kcal, Eiweiß, Kohlenhydrate, Zucker, Fett) 
-    passen sich parallel zur gewählten Portionsgröße dynamisch an.
+Unter „Konto → Bearbeitungsrechte für Rezepte“ können ernannte Admins das
+Anlegen, Ändern und Löschen von Rezepten für Familienmitglieder erlauben
+oder entziehen. Leserechte für den gemeinsamen Bereich bleiben davon getrennt.
+Eine Sperre oder entfernte Familienmitgliedschaft wird bei weiteren
+Serveranfragen geprüft. Bereits gelesene oder exportierte Kopien lassen
+sich nicht von fremden Geräten zurückholen.
 
-• 🔄 Smarter Beilagentausch & Insulin-Ampel:
-  - Jedes Hauptgericht verfügt über einen flexiblen Beilagen-Selektor:
-    * Ohne Extra-Beilage (+0 kcal | Optimal stabil)
-    * Zucchini-Nudeln / Zoodles (+22 kcal | Ketogen / Low-Carb)
-    * Protein-Nudeln (+145 kcal | Stabiler Blutzucker)
-    * Basmati-Reis (+130 kcal | Mäßiger Anstieg)
-    * Kartoffeln (+110 kcal | Höherer Insulin-Peak)
-  - Berechnung der Gesamtnährwerte erfolgt sofort nach Auswahl.
+Der persönliche Adminbereich ist nur für das dafür hinterlegte Betreiberkonto
+sichtbar. Er verlangt zusätzlich das persönliche Adminpasswort. Nach der
+Freigabe können dort registrierte Konten gesucht, bestätigte freie Konten
+hinzugefügt, Rollen vergeben und Zugänge gesperrt werden. Zentrale Freigaben
+für Forum, öffentliche Profile und KI sowie Modell- und Nutzungslimits
+werden dort verwaltet. Die zusätzliche Freigabe läuft spätestens nach zehn
+Minuten ab und wird beim Schließen verworfen bzw. serverseitig gesperrt.
+Ein letztes primäres Adminkonto wird gegen versehentlichen Rechteverlust geschützt.
+Adminrechte für die Familienverwaltung eröffnen nicht automatisch diesen
+persönlichen Bereich.
 
-• 🥣 Sorten- & Dip-Wechsler:
-  - Spezialrezepte wie "5 gesunde Dips" verfügen über ein internes 
-    Sorten-Dropdown (Aioli, Honig-Senf, Salsa, Teriyaki, Tzatziki).
-  - Bei Sortenwechsel aktualisieren sich Nährwertkarten, Zutatenliste 
-    und Zubereitungsschritte automatisch im selben Modal.
+3. REZEPTE FINDEN
+Die bestehende Sammlung mit 263 Originalrezepten wurde übernommen.
+Die Startseite zeigt die Anzahl aller Rezepte und der Gerichte mit mindestens
+25 g Eiweiß pro Portion. Die Liste lädt zunächst 24 Karten; über „Weitere
+Rezepte anzeigen“ kommen die nächsten hinzu. Suche und Filter beziehen sich
+auf den gesamten geladenen Datenbestand, nicht nur auf sichtbare Karten.
 
-• 📲 WhatsApp-Export & Synchronisierte Einkaufsliste:
-  - "Einkaufsliste per WhatsApp senden": Erstellt eine fertig 
-    formatierte Liste mit Häkchen und Mengenangaben für den Messenger.
-  - "Auf unsere Notiz-Einkaufsliste setzen": Überträgt die Zutaten 
-    per Knopfdruck direkt in die geteilte Supabase-Notizendatenbank.
+Mahlzeiten: Frühstück, Mittagessen, Abendessen, Snacks & Süßes.
+Zusätzliche Filter: Low-Carb, High-Protein, Airfryer und Favoriten.
+Rezepte mit mehreren Mahlzeit-Kategorien können unter mehreren Filtern passen.
+Alte Kategorienformate werden beim Lesen vereinheitlicht.
 
-• 🔊 Integrierte Küchen-Sprachausgabe:
-  - Liest die kompletten Zubereitungsschritte (Vorbereitung, Herd, 
-    Backofen, Airfryer) über die native Sprachausgabe des Geräts vor.
-  - Freihändige Bedienung beim Kochen ohne Display-Berührung.
-  - Jederzeit per Klick auf "⏹️ Vorlesen stoppen" anhaltbar.
+Mehrere Suchbegriffe kombinieren, etwa „Hähnchen Brokkoli“. Alle eingegebenen
+Begriffe müssen zum Rezept passen. Durchsucht werden Titel, Zutaten,
+Zubereitung, Beschreibung und Tipps. Umlaute und Schreibweisen wie
+„Hähnchen“ / „Haehnchen“ werden berücksichtigt. Mit dem × wird die Suche geleert.
 
-• 🩸 Zyklus-Phasen & Hormongerechte Ernährung:
-  - Automatische Berechnung der aktuellen Zyklusphase nach Eingabe des 
-    ersten Periodentags und der Zykluslänge (Standard: 28 Tage).
-  - 4 definierte Ernährungsphasen:
-    1. Menstruation (Tag 1–5): Eisenreich, wärmend & entkrampfend.
-    2. Follikelphase (Tag 6–13): Leichte Proteine, Energie & Keimlinge.
-    3. Eisprung (Tag 14–16): Gesunde Fette, Antioxidantien & Zink.
-    4. Lutealphase (Tag 17–28): Blutzucker-Balance & Heißhunger-Schutz.
-  - "✨ Passende Rezepte anzeigen": Filtert den Rezeptkatalog direkt 
-    auf mahlzeitengerechte Rezepte für die aktuelle Phase.
+Die Gruppen Fleisch & Fisch, Gemüse, Proteine & Milch sowie Basics & Gewürze
+helfen beim Zusammenstellen der Zutaten-Suche. Ein zweites Antippen entfernt
+eine Zutat wieder. Bei leeren Ergebnissen die Suche oder Filter zurücksetzen.
 
-• 📝 Geteiltes Notiz- & Einkaufslisten-System:
-  - Echtzeit-Zwei-Wege-Synchronisation über Supabase PostgreSQL.
-  - Farbcodierte Autoren-Badges: 🌸 Ramona | 🔧 Matze | ✍️ Gast.
-  - Status "Erledigt" durch Antippen – durchgestrichene Anzeige.
-  - Schnelles Löschen per Papierkorb-Symbol.
+4. FAVORITEN
+Das Herz auf der Karte oder im Rezept merkt ein Gericht. Unter „Favoriten“
+findest du diese Auswahl wieder. Die Favoriten liegen nur auf diesem Gerät
+und werden nicht automatisch mit anderen Geräten geteilt. Vorhandene alte
+Favoriten werden beim ersten Öffnen übernommen, sofern der Browserspeicher
+noch vorhanden ist. Das Entfernen aus Favoriten löscht kein Rezept.
 
-• 👨‍🍳 KI-Chef (Spitzenkoch mit Live-Google-Websuche):
-  - Direkte Verbindung zur Google Gemini API mit aktivierter Google-Suche.
-  - Themen-Schnellauswahl für typische Küchenfragen:
-    * 🔄 Zutat ersetzen (Low-Carb)
-    * ⏱️ Garzeiten & Temperatur (Ofen, Pfanne, Airfryer)
-    * 🥗 Passende Soßen- & Beilagen-Kombinationen
-    * 🌿 Ernte & Haltbarmachung frischer Gartenkräuter
-    * 🥣 Kreative Resteverwertung aus dem Kühlschrank
-  - Freies Eingabefeld für spontane Küchen- und Ernährungsfragen.
+5. REZEPTDETAILS UND PORTIONEN
+Ein Rezept über Bild, Emoji oder Titel öffnen. Die Portionszahl lässt sich
+von 1 bis 20 einstellen. Zutatenmengen werden einschließlich Dezimalzahlen,
+Brüchen wie 1/2 und ½ sowie Mengenbereichen wie 350–400 g umgerechnet.
+Mengen ohne Zahl, zum Beispiel „Salz nach Geschmack“, bleiben unverändert.
 
+Die angezeigten Nährwerte beziehen sich auf die gewählte Gesamtmenge.
+Die Ausgangswerte und Zutaten sind auf eine Portion bezogen. Unbekannte
+Nährwerte werden als „–“ dargestellt; fehlende Werte werden nicht erfunden.
+Erfasst sind Energie, Eiweiß, Kohlenhydrate, Zucker, Fett, gesättigte Fette,
+Ballaststoffe und Salz. Nährwerte sind Richtwerte, keine Messwerte.
 
-3. ERNÄHRUNGS-PHILOSOPHIE & NUTRI-SCORE
-------------------------------------------------------------------------
+Beilagen, sofern im Rezept aktiviert:
+- Ohne Extra-Beilage
+- Zucchini-Nudeln, 150 g pro Portion
+- Protein-Nudeln, 100 g gekocht pro Portion
+- Basmati-Reis, 100 g gekocht pro Portion
+- Kartoffeln, 150 g gekocht pro Portion
+Die gewählte Beilage wird in Zutaten und Nährwerten mitgerechnet. Angezeigte
+Kohlenhydratmengen sind nur eine Orientierung. Individuelle Insulin- oder
+Blutzuckerreaktionen können daraus nicht sicher vorhergesagt werden.
 
-• Low-Carb-Fokus:
-  Alle Rezepte zielen auf minimale Insulinausschüttung ab. Kurzkettige 
-  Zuckerarten werden konsequent vermieden oder durch natürliche 
-  Alternativen ersetzt, um Heißhungerattacken vorzubeugen.
+„5 gesunde Dips“ enthält die bisherigen Varianten Aioli, Honig-Senf,
+Tomaten-Salsa, Teriyaki und Tzatziki. Der Wechsel ändert Zutaten,
+Vorbereitung und Nährwerte gemeinsam. Die Variantendaten werden erst nach
+Anmeldung geladen.
 
-• High-Protein-Standard:
-  Gerichte der Kategorie "High-Protein" liefern mindestens 25 g 
-  reines Eiweiß pro Einzelportion zum Erhalt und Aufbau fettfreier 
-  Muskelmasse sowie zur langanhaltenden Sättigung.
+Vorbereitung, Herd, Backofen und Airfryer werden als eigene Abschnitte
+angezeigt, wenn dafür Angaben vorhanden sind. „Vorlesen“ nutzt die
+Sprachausgabe deines Geräts, „Stoppen“ beendet sie. Beim Schließen des
+Rezeptfensters wird die Ausgabe gestoppt. Stimme und Verfügbarkeit hängen
+vom Browser und Betriebssystem ab. Unterstützte Browser können beim Kochen
+den Bildschirm wach halten; das Betriebssystem kann diese Freigabe entziehen.
 
-• Airfryer-Kennzeichnung (🌪️):
-  Spezielle Markierung für fettarme Heißluftfritteusen-Zubereitung 
-  inklusive eigener Garzeiten und Temperaturempfehlungen.
+Vorhandene Gesundheitsangaben werden als übernommene Originalhinweise
+gekennzeichnet. Die gespeicherte Einschätzung A–E ist keine in der App
+medizinisch oder amtlich geprüfte Nutri-Score-Berechnung.
 
+6. EINKAUFSLISTE UND NOTIZEN
+Im Rezept „Auf die Einkaufsliste“ wählen. Übernommen werden Titel,
+Portionszahl, aktuell gewählte Variante und die skalierte Zutatenliste mit
+Beilage. Alternativ eine eigene Notiz in der Einkaufsliste eingeben.
+Als Anzeigename sind Ramona, Matze oder ein eigener Name möglich.
 
-4. DATENSICHERHEIT, BACKUP & OFFLINE-NUTZUNG
-------------------------------------------------------------------------
+Notizen abhaken, wieder öffnen oder über × nach Bestätigung löschen.
+Alle freigeschalteten Mitglieder sehen und bearbeiten dieselbe Liste.
+Änderungssignale führen zu einem automatischen Abgleich. Geöffnete Fenster
+und ungespeicherte Formulare werden dabei nicht einfach überschrieben.
+Zusätzlich gibt es einen regelmäßigen Abgleich und „Aktualisieren“.
 
-• Admin-Schutz:
-  - Bearbeiten, Anlegen und Löschen von Rezepten erfordert den 
-    autorisierten PIN-Code (gespeichert in der Supabase-Datenbank).
-  - Fremde Besucher können die App ansehen, aber nichts verändern.
+„Per WhatsApp teilen“ öffnet WhatsApp mit dem vorbereiteten Text. Erst du
+wählst den Empfänger und sendest die Nachricht. Die App verschickt selbst
+keine WhatsApp-Nachricht.
 
-• 💾 JSON-Vollsicherung:
-  - Vollständiger Download aller Datenbank-Rezepte als Backup-Datei 
-    (Backup_YYYY-MM-DD.json) über den Setup-Bereich.
-  - Notfall-Wiederherstellung (Import) jederzeit per Klick möglich.
+7. REZEPTE ANLEGEN, BEARBEITEN UND LÖSCHEN
+Mit Bearbeitungsfreigabe „+ Rezept“ wählen oder ein bestehendes Rezept
+öffnen und „Rezept bearbeiten“ antippen. Titel, Emoji, Kategorien,
+Suchbegriffe, Zutaten, sämtliche Garabschnitte, Nährwerte, Beschreibung,
+Hinweise, Tipps und ein optionales Foto können bearbeitet werden.
 
-• Lokale Speicherung (localStorage):
-  - Favoritenliste (❤️), Farbschema (Theme), PIN-Login und 
-    Zyklusdaten verbleiben verschlüsselt im lokalen Gerätespeicher.
+Kategorien durch Komma trennen, zum Beispiel „mittag, abend, lowcarb“.
+Leere unbekannte Nährwerte bleiben leer. Fotos erst beim Speichern hochladen.
+Ein neues JPEG wird im Browser auf höchstens 1280 Pixel und 256 KB verkleinert;
+Original-Metadaten werden nicht übernommen. JPEG, PNG und WebP bis 15 MB
+können ausgewählt werden. Zu große Ergebnisse müssen weiter zugeschnitten
+werden. Gespeicherte Fotos befinden sich in einem privaten Speicherbereich.
 
-• Homescreen-Installation (PWA):
-  - iOS (Safari): Teilen-Symbol (Viereck mit Pfeil nach oben) 
-    antippen -> "Zum Home-Bildschirm".
-  - Android (Chrome): Dreipunkt-Menü -> "App installieren".
+„Tipps speichern“ ändert die Hinweise zum Rezept. Löschen verlangt eine
+zusätzliche Bestätigung. Falls jemand das Rezept während deiner Bearbeitung
+geändert hat, wird dein veralteter Stand nicht still darübergeschrieben.
+Dann die angezeigten Angaben sichern und das Rezept neu laden.
+Fehlerhafte oder nicht abgeschlossene Speichervorgänge werden angezeigt.
 
+8. GEMINI UND OPENAI / CHATGPT
+Unter „Konto → KI-Zugänge“ verwaltet die Familienverwaltung die gemeinsamen
+API-Schlüssel für Google Gemini und OpenAI. Schlüssel ersetzen und speichern;
+ein gespeicherter Wert wird nicht wieder angezeigt. Die Schlüssel werden
+serverseitig verschlüsselt verwaltet und nicht in Rezepten, Notizen,
+Sicherungen, URLs oder öffentlichem JavaScript gespeichert.
 
-5. KONTAKT & IMPRESSUM
-------------------------------------------------------------------------
-Betreiber & Entwickler:
-Marcel Kometz
-Manfredstr. 15 | 47178 Duisburg
-Telefon: 0152 03397547
-E-Mail: marcelkometz@icloud.com
+OpenAI-API und ein ChatGPT-Abo sind unterschiedliche Angebote. Für die
+OpenAI-API sind ein API-Schlüssel und gegebenenfalls eigene API-Abrechnung
+nötig. Dasselbe gilt entsprechend für Google Gemini und dessen Kontingente.
 
-Hinweis: Privates Familienprojekt für Ramona & Marcel.
-========================================================================
+Unter „Meine KI“ wählt jede Person ihren Anbieter und ein freigegebenes
+Modell. Im Küchen-Assistenten und Rezeptentwurf kann die Auswahl ebenfalls
+angepasst werden. Es wird das tatsächlich gewählte Modell angesprochen;
+es gibt keine heimliche Zuordnung verschiedener Modellnamen zum selben Modell.
+Der Betreiber kann Modelle und gemeinsame Nutzungslimits begrenzen.
+
+Der Küchen-Assistent beantwortet Fragen zu Zutaten, Ersatzprodukten,
+Garzeiten, Vorratshaltung, Kräutern und Resteverwertung. Themenvorschläge
+helfen beim Formulieren. Der sichtbare Gesprächsverlauf wird im Arbeitsspeicher
+gehalten; „Gespräch leeren“ entfernt ihn aus der Anzeige. Eine optionale
+Websuche kann aktuelle Quellen einbeziehen. Mitgelieferte Quellen werden
+als Links angezeigt. Der Anbieter muss das gewählte Modell und die
+Websuche unterstützen; bei einer Ablehnung erscheint eine Fehlermeldung.
+
+Für ein neues Rezept einen Wunschtext oder ein Foto auswählen, die
+Übermittlung an den angezeigten Anbieter bestätigen und „Mit KI ausfüllen“
+wählen. Es entsteht ein bearbeitbarer Entwurf. Erst „Rezept speichern“
+schreibt ihn in eure Sammlung. Zutaten, Mengen, Allergene, Garzeiten und
+Nährwertschätzungen selbst prüfen. KI kann sich irren. Keine Personen,
+privaten Dokumente oder vertraulichen Inhalte übertragen.
+
+Bei fehlendem Schlüssel, Anbieterfehler, nicht verfügbarem Modell oder
+erschöpftem Kontingent wird nichts als neues Rezept gespeichert. Meldungen
+zeigen den Fehler ohne den Schlüssel oder rohe vertrauliche Anbieterantworten.
+OpenAI-Anfragen verwenden store:false. Darüber hinaus gelten die API-
+Bedingungen und Aufbewahrungsregeln des jeweiligen Anbieters.
+
+Alte möglicherweise missbrauchte Schlüssel beim jeweiligen Anbieter widerrufen.
+Ein Entfernen aus der aktuellen App löscht keine Kopien aus einem früheren
+Git-Verlauf oder von fremden Geräten.
+
+9. GEMEINSAMES FORUM
+Das Forum in Rezepte und das Familienforum unter Gartenleben verwenden
+identische Themen und Antworten. Es wird keine getrennte Kopie gepflegt.
+Themen suchen, nach Kategorie filtern, neue Themen schreiben und antworten.
+Die vorhandenen Regeln für Autoren und Familienverwaltung gelten in beiden
+Apps. Eine zentrale Forum-Sperre wirkt für beide Zugänge.
+
+Forum und Antworten sind nur innerhalb eurer Familie zugänglich und verlangen
+eine gültige Anmeldung. Öffentliche Profile geben keinen Zugang zum Forum.
+Für die gemeinsame Sicherung von Forum und Erntetagebuch stehen die
+entsprechenden Sicherungsfunktionen unter Gartenleben in der Garten-App bereit.
+
+10. FREIWILLIGE PROFILE
+Unter „Profil“ Anzeigename, Wohnort und Foto bearbeiten. Zuerst privat
+speichern. Anschließend kann eine Veröffentlichung ausdrücklich aktiviert
+werden. Öffentlich sind ausschließlich der gewählte Anzeigename, das
+gewählte Profilfoto und – nach zusätzlicher Zustimmung – der Wohnort.
+E-Mail, Kontorechte, Rezepte, Einkaufslisten, Forum und KI-Schlüssel werden
+nicht Bestandteil des öffentlichen Profils.
+
+Der Profil-Link kann geteilt werden. Zurückstellen auf privat sperrt neue
+öffentliche Abrufe. Kopien bei anderen lassen sich dadurch nicht zurückholen.
+Profile und Fotos können in der Profilverwaltung gelöscht werden, ohne die
+gemeinsame Rezeptsammlung zu löschen. Garten und Rezepte verwenden dasselbe
+persönliche Profil. Änderungen sind damit in beiden Apps wirksam.
+
+11. ZYKLUS UND ERNÄHRUNG
+Auf der Startseite oder unter Konto „Zyklus & Ernährung“ öffnen. Den ersten
+Tag der letzten Periode und eine Zykluslänge von 18 bis 45 Tagen eingeben.
+Die App zeigt eine grobe Phase: Menstruation, Follikelphase, Eisprung oder
+Lutealphase. „Passende Rezeptideen“ setzt einen zur Phase passenden
+Zutaten-Suchvorschlag. Dieser Vorschlag ist keine medizinische Empfehlung.
+
+Zyklusdaten bleiben ausschließlich lokal auf diesem Gerät. Sie werden nicht
+in Supabase gespeichert, im Forum veröffentlicht oder an KI-Dienste geschickt.
+Mit „Zyklusdaten auf diesem Gerät löschen“ lassen sie sich entfernen.
+Die Berechnung ist keine zuverlässige Eisprungvorhersage und keine Verhütung.
+
+12. JAHRESZEITEN UND SPRÜCHE
+Frühling, Sommer, Herbst oder Winter über die Design-Schaltfläche auswählen.
+Die Oberfläche erhält die entsprechende Farbwelt der Garten-App. Passende
+Gerichte-Sprüche wechseln alle 15 Minuten. Pro Jahreszeit gibt es 24
+verschiedene Texte. Eine lokale Kennungs- und Zeit-Historie verhindert eine
+Wiederholung innerhalb von sechs Stunden, auch nach normalem Neuladen oder
+manuellem Jahreszeitenwechsel. Bei ungewöhnlich vielen schnellen Wechseln
+bleibt der aktuelle Text stehen, statt einen gerade verbrauchten zu wiederholen.
+Es werden dafür keine persönlichen Inhalte an einen Server geschickt.
+
+13. EIER-TIMER
+Unter „Konto → Küchenhelfer → Eier-Timer“ öffnen. Die vorhandene vollständige
+Timer-App bleibt enthalten: Eiergröße bzw. Gewicht, Kühlschrank-/Raum- oder
+eigene Starttemperatur, Höhenlage und gewünschte Garstufe wählen. Die
+Zeitberechnung berücksichtigt den Siedepunkt. Starten, pausieren,
+weiterlaufen lassen oder zurücksetzen. Ein Signal kündigt das Ende an.
+
+Beim Schließen und erneuten Öffnen innerhalb derselben App-Sitzung bleibt
+das Timerfenster erhalten. Bildschirm- und Tonsignale hängen von Browser,
+Lautstärke und Betriebssystem ab. Ein geschlossenes oder vom Betriebssystem
+angehaltenes Browserfenster ersetzt keinen zuverlässigen Systemwecker.
+
+14. SICHERN UND WIEDERHERSTELLEN
+Unter „Konto → Sicherungen“ alle Rezepte als JSON exportieren. Das Backup
+enthält die gespeicherten Rezeptfelder und IDs. Es enthält keine Passwörter,
+Anmeldetokens, KI-Schlüssel oder persönlichen Zyklusdaten. Eine getrennte
+JSON-Kopie der Einkaufsliste kann ebenfalls heruntergeladen werden.
+
+Die Familienverwaltung kann ein Rezept-Backup bis 2 MB und 1.000 Rezepte
+prüfen und nach ausdrücklicher Bestätigung in die Datenbank zurückspielen.
+Vorher eine aktuelle Sicherung anlegen. Bestehende Rezepte mit gleicher ID
+werden beim Wiederherstellen überschrieben. Unpassende IDs oder doppelte
+Titel können zum Abbruch führen. Die Übernahme erfolgt innerhalb einer
+Datenbanktransaktion; bei einem Fehler werden nicht einzelne Teilmengen
+übernommen. Auch das frühere normalisierte Rezept-Exportformat wird gelesen.
+
+Fotos sind im JSON nur als Verweise enthalten. Die Dateien müssen zusätzlich
+im privaten Speicher erhalten bleiben; ein JSON-Export allein ist keine
+vollständige Datenbank- und Dateisicherung. Profile, Forum, Garten und
+Betreiberkonfiguration werden nicht durch einen Rezept-Import ersetzt.
+Backups sind private Dateien und sollten entsprechend aufbewahrt werden.
+
+15. INSTALLATION, VERBINDUNG UND FENSTER
+Die App läuft auf Smartphone, Tablet und Computer. „Web-App installieren“
+zeigt gerätespezifische Schritte. Auf iPhone/iPad in Safari „Teilen → Zum
+Home-Bildschirm“, auf Android in Chrome/Edge das Installationsangebot oder
+„Zum Startbildschirm“ wählen. Auf Desktop das Installationssymbol des
+Browsers verwenden. Ohne Installation bleibt die Webseite nutzbar.
+
+Private Inhalte und Speichervorgänge benötigen Internet. Der Service Worker
+speichert nur öffentliche Programmdateien; keine Rezepte, privaten Fotos,
+Sitzungen oder API-Antworten für einen Offline-Zugriff. Offline wird kein
+vermeintlich erfolgreicher Speichervorgang bestätigt.
+
+Bei geöffneten Dialogen ist der Hintergrund in beiden Apps gesperrt. Nur
+der Fensterinhalt scrollt. Nach dem Schließen kehrt die Seite zur vorherigen
+Scrollposition zurück. Das Schließen eines Fensters ist nicht dasselbe wie
+das Speichern eines Entwurfs.
+
+16. TECHNISCHER DATENSCHUTZ UND GRENZEN
+Die Rezeptdaten liegen im eigenen Supabase-Projekt. Anmeldung, Familie,
+Profile und Forum verwenden das bestehende Garten-Projekt. Das Rezept-
+Backend prüft den Benutzer, eine aktive Sitzung, die aktuelle Freigabe und
+die Familienzugehörigkeit, bevor es Daten zurückgibt oder Änderungen erlaubt.
+Direkte anonyme Zugriffe auf Rezept- und Systemnotiztabellen sind gesperrt.
+Die frühere Browser-PIN-Prüfung und öffentliche KI-Schlüsselablage sind stillgelegt.
+
+Öffentliche Supabase-Publishable-Keys und Projektadressen sind technische
+Clientkonfiguration, keine geheimen Betreiber- oder KI-Schlüssel. Die
+Datenzugriffe werden unabhängig davon im Backend kontrolliert. Service-
+und Anbieter-Schlüssel dürfen niemals in diese öffentlichen Dateien.
+
+GitHub und Supabase verarbeiten technisch notwendige Verbindungsdaten.
+Bei optionaler KI-Nutzung gelten zusätzlich die Bedingungen von Google bzw.
+OpenAI. Es werden keine Werbung und keine Besucheranalyse eingebunden.
+Für Auskunft, Korrektur oder Löschwünsche den Betreiber kontaktieren.
+Eine absolute Sicherheitsgarantie oder Garantie für jeden Browser und jeden
+externen Dienst ist technisch nicht möglich. Regelmäßige Updates, sichere
+persönliche Passwörter, Anbieterlimits und eigene Sicherungen bleiben wichtig.
+
+BETREIBER
+Marcel Kometz · Manfredstr. 15 · 47178 Duisburg · Deutschland
+Telefon: 0152 03397547 · E-Mail: marcelkometz@icloud.com

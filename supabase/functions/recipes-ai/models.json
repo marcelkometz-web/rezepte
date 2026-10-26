@@ -1,0 +1,6 @@
+[
+  { "id": "gemini-3.1-flash-lite", "label": "Gemini 3.1 Flash-Lite" },
+  { "id": "gemini-3.1-pro-preview", "label": "Gemini 3.1 Pro (Vorschau)" },
+  { "id": "gemini-3.8-flash", "label": "Gemini 3.8 Flash" },
+  { "id": "gemini-4-argon", "label": "Gemini 4 Argon" }
+]

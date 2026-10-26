@@ -1,22 +1,33 @@
 # Rezepte
 
-Private Rezepte-App für Ramona und Marcel.
+Private Familien-App: https://marcelkometz-web.github.io/rezepte/
 
-Vorgesehene Web-Adresse: https://marcelkometz-web.github.io/rezepte/
+Gemeinsame Anmeldung, Nutzerfreigabe, freiwillige Profile und Familienforum mit [Ramonas Garten](https://marcelkometz-web.github.io/newgarten/). Die 263 übernommenen Rezepte liegen weiterhin in ihrem eigenen Supabase-Projekt.
 
-## Adresse auf GitHub umstellen
+Die vollständige [Bedienhilfe](Read.txt) erklärt alle Funktionen, Rechte, KI-Zugänge, Installation und Sicherungen. Das [Impressum](impressum.html) ist ohne Anmeldung erreichbar.
 
-1. Das Repository unter **Settings → General → Repository name** in `rezepte` umbenennen.
-2. Unter **Settings → Pages** die Veröffentlichung aus dem Branch `main` und dem Ordner `/ (root)` prüfen.
-3. Nach der Veröffentlichung die neue Adresse und den Eier-Timer öffnen.
+## Entwicklung
 
-Die App verwendet relative Links für ihre eigenen Dateien. Der Eier-Timer ist dadurch unabhängig vom Repository-Namen erreichbar.
+```sh
+npm ci --ignore-scripts
+npm test
+npm run build
+```
 
-GitHub leitet frühere Repository-Links nach einer Umbenennung um; für die bisherige GitHub-Pages-Adresse ist keine automatische Weiterleitung garantiert. Gespeicherte App-Links und Lesezeichen auf die neue Adresse aktualisieren.
+`src/app.js` enthält die für Rezepte abgeleitete bestehende Konto-, Profil-, Admin- und Forumsoberfläche. `src/recipes-ui.js` ergänzt die Rezeptfunktionen. `src/domain.mjs` enthält Mengenrechnung, Suche und Backup-Konvertierung. `src/seasons.mjs` enthält saisonale Gerichte-Sprüche und Wiederholungsschutz.
 
-## Getrennte Projekte
+`config.json` enthält ausschließlich öffentliche Supabase-Projektadressen und Publishable-Keys. Niemals Anbieter-Schlüssel, Service-Keys, Passwörter oder private Rezept-Backups einchecken.
 
-Diese App verwendet das Supabase-Projekt `kzxzhpebugvzyqfjqedx`.
-Die Garten-App unter `newgarten` und ihr Supabase-Projekt werden bei der Umbenennung nicht verändert.
+## Backend
 
-Die bisherige Bedienungsanleitung steht in [Read.txt](Read.txt).
+- `recipes-api` im Rezepteprojekt prüft die aktuelle Garten-Identität, aktive Sitzung, Familienfreigabe und Bearbeitungsrechte. Browserrollen haben absichtlich keine direkten Tabellenrechte für Rezepte und Systemnotizen.
+- `recipes-ai` im Gartenprojekt verwendet dessen bereits verschlüsselt verwaltete Gemini-/OpenAI-Zugänge sowie zentrale Modellfreigaben und Limits. Anbieter-Schlüssel werden nicht an den Client zurückgegeben.
+- Beide Funktionen prüfen die Anmeldung selbst; die plattformseitige Legacy-JWT-Prüfung ist deshalb deaktiviert. Fehlende oder ungültige Benutzertokens werden im Handler zurückgewiesen.
+- Das neue Änderungssignal `recipe_sync_events` enthält nur eine Familienkennung und einen Zeitstempel für den Abgleich. Garten- und Rezeptinhalte werden dafür nicht kopiert.
+- Forum und Profilverwaltung verwenden die bestehenden Garten-Daten und Zugriffsregeln.
+
+Die SQL-Dateien wurden mit der Supabase-CLI angelegt und mit dem verbundenen Datenbankzugang ausgeführt. Seed- und Sicherungsdateien mit privaten Originalinhalten werden separat aufbewahrt und sind nicht Bestandteil dieses öffentlichen Repositorys. Ein JSON-Rezeptexport enthält keine Bilddateien und ersetzt keine vollständige Datenbank- und Storage-Sicherung.
+
+## Veröffentlichung
+
+GitHub Pages veröffentlicht `main` aus `/ (root)`. Alle lokalen Dateien verwenden den Pfad `/rezepte/`; der Wechsel zur Garten-App führt nach `/newgarten/`. Keine Sitzungen oder Tokens werden über Links übertragen.
