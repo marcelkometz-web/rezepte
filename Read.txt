@@ -1,5 +1,5 @@
 ========================================================================
-🥗 DIEGARTENMUTTI86 – ERNÄHRUNGS- & REZEPTE-APP
+🥗 REZEPTE – ERNÄHRUNGS- & REZEPTE-APP
 DOKUMENTATION & VOLLSTÄNDIGE BEDIENUNGSANLEITUNG
 ========================================================================
 Entwickelt von: Marcel Kometz
@@ -8,7 +8,7 @@ Version: 3.5 (Smart Low-Carb & High-Protein Edition | Stand: Oktober 2026)
 
 1. ÜBER DIESE APP
 ------------------------------------------------------------------------
-"DieGartenMutti86" ist eine hochgradig spezialisierte, mobile Web-App 
+"Rezepte" ist eine hochgradig spezialisierte, mobile Web-App
 für Smartphone, Tablet und PC zur Förderung von Vitalität, gesunder 
 Gewichtsreduktion und maximaler Blutzucker-Stabilität. 
 

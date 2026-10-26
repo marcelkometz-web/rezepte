@@ -1,5 +1,5 @@
 // app.js
-// Hauptlogik für DieGartenMutti86
+// Hauptlogik für Rezepte
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
