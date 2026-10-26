@@ -20,7 +20,7 @@ npm run build
 
 ## Backend
 
-- `recipes-api` im Rezepteprojekt prüft die aktuelle Garten-Identität, aktive Sitzung, Familienfreigabe und Bearbeitungsrechte. Browserrollen haben absichtlich keine direkten Tabellenrechte für Rezepte und Systemnotizen.
+- `recipes-api` im Rezepteprojekt prüft die aktuelle Garten-Identität, aktive Sitzung, Familienfreigabe und Bearbeitungsrechte. Browserrollen haben absichtlich weder direkten Schema-Zugriff noch Tabellenrechte für Rezepte und Systemnotizen. Auch alte HTTP-RPCs und frühere Schlüsselablagen sind für diese Rollen gesperrt.
 - `recipes-ai` im Gartenprojekt verwendet dessen bereits verschlüsselt verwaltete Gemini-/OpenAI-Zugänge sowie zentrale Modellfreigaben und Limits. Anbieter-Schlüssel werden nicht an den Client zurückgegeben.
 - Beide Funktionen prüfen die Anmeldung selbst; die plattformseitige Legacy-JWT-Prüfung ist deshalb deaktiviert. Fehlende oder ungültige Benutzertokens werden im Handler zurückgewiesen.
 - Das neue Änderungssignal `recipe_sync_events` enthält nur eine Familienkennung und einen Zeitstempel für den Abgleich. Garten- und Rezeptinhalte werden dafür nicht kopiert.
