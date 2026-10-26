@@ -8017,7 +8017,7 @@ ${n}`), u.currentTarget), "button secondary"), S("Drucken / als PDF", () => Ed(t
     }
     async function nh(t) {
       let e = C(await $().rpc("rg_public_profile", { profile_slug: t })), n = o("img", { class: "public-profile-photo", alt: "Profilfoto", hidden: true }), r = e ? o("article", { class: "panel public-profile" }, n, o("p", { class: "eyebrow" }, "\xD6FFENTLICHES PROFIL"), o("h1", {}, e.display_name), e.city ? o("p", { class: "public-profile-city" }, "\u{1F4CD} ", e.city) : null, E("Diese Angaben wurden von der Person selbst zur Ver\xF6ffentlichung freigegeben.")) : lt("Dieses Profil ist nicht \xF6ffentlich.", "Der Link ist ung\xFCltig oder das Profil wurde auf privat gestellt.");
-      if (xe.replaceChildren(o("main", { class: "setup-page" }, o("div", { class: "installation-top" }, Ua()), o("a", { href: le, class: "brand" }, "Rezepte"), r, o("a", { href: le, class: "button secondary" }, "Zur Garten-App"), Ct())), e?.photo_path) try {
+      if (xe.replaceChildren(o("main", { class: "setup-page" }, o("div", { class: "installation-top" }, Ua()), o("a", { href: le, class: "brand" }, "Rezepte"), r, o("a", { href: "/garten/", class: "button secondary" }, "Zur Garten-App"), Ct())), e?.photo_path) try {
         if (!new RegExp(`^${t}/[a-f0-9-]{36}\\.jpg$`).test(e.photo_path)) return;
         let i = C(await $().storage.from("rg-public-profile-photos").download(e.photo_path));
         if (i.type !== "image/jpeg" || i.size > 262144) return;
@@ -8322,7 +8322,7 @@ ${n}`), u.currentTarget), "button secondary"), S("Drucken / als PDF", () => Ed(t
     }
     async function oh() {
       if (window.self !== window.top) {
-        xe.replaceChildren(o("main", { class: "setup-page" }, o("h1", {}, "Garten-App direkt \xF6ffnen"), o("p", {}, "Die Anmeldung und der Familienbereich sind in eingebetteten Fenstern gesperrt."), o("a", { href: le, target: "_blank", rel: "noopener noreferrer", class: "button" }, "Garten-App \xF6ffnen")));
+        xe.replaceChildren(o("main", { class: "setup-page" }, o("h1", {}, "Rezepte-App direkt \xF6ffnen"), o("p", {}, "Die Anmeldung und der Familienbereich sind in eingebetteten Fenstern gesperrt."), o("a", { href: le, target: "_blank", rel: "noopener noreferrer", class: "button" }, "Rezepte-App \xF6ffnen")));
         return;
       }
       try {
@@ -8330,7 +8330,7 @@ ${n}`), u.currentTarget), "button secondary"), S("Drucken / als PDF", () => Ed(t
         await Ti();
         let e = new URL(location.href).searchParams.get("profile");
         if (e !== null && !Zt(p.access)) {
-          /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(e) ? await nh(e.toLowerCase()) : xe.replaceChildren(o("main", { class: "setup-page" }, lt("Ung\xFCltiger Profil-Link.", "Bitte den vollst\xE4ndigen Profil-Link verwenden."), o("a", { href: le, class: "button" }, "Zur Garten-App"))), _i = Ri({ basePath: le, isSafe: () => !j.open });
+          /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(e) ? await nh(e.toLowerCase()) : xe.replaceChildren(o("main", { class: "setup-page" }, lt("Ung\xFCltiger Profil-Link.", "Bitte den vollst\xE4ndigen Profil-Link verwenden."), o("a", { href: "/garten/", class: "button" }, "Zur Garten-App"))), _i = Ri({ basePath: le, isSafe: () => !j.open });
           return;
         }
         t.auth.onAuthStateChange((i, a) => {
