@@ -3,7 +3,7 @@ Version 4 · Stand: 26. Oktober 2026
 
 Privates Familienprojekt von Marcel Kometz für Ramona und Marcel.
 Rezepte: https://marcelkometz-web.github.io/rezepte/
-Garten:  https://marcelkometz-web.github.io/newgarten/
+Garten:  https://marcelkometz-web.github.io/garten/
 Impressum: https://marcelkometz-web.github.io/rezepte/impressum.html
 Kontakt: marcelkometz@icloud.com
 

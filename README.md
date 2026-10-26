@@ -2,7 +2,7 @@
 
 Private Familien-App: https://marcelkometz-web.github.io/rezepte/
 
-Gemeinsame Anmeldung, Nutzerfreigabe, freiwillige Profile und Familienforum mit [Ramonas Garten](https://marcelkometz-web.github.io/newgarten/). Die 263 übernommenen Rezepte liegen weiterhin in ihrem eigenen Supabase-Projekt.
+Gemeinsame Anmeldung, Nutzerfreigabe, freiwillige Profile und Familienforum mit [Ramonas Garten](https://marcelkometz-web.github.io/garten/). Die 263 übernommenen Rezepte liegen weiterhin in ihrem eigenen Supabase-Projekt.
 
 Die vollständige [Bedienhilfe](Read.txt) erklärt alle Funktionen, Rechte, KI-Zugänge, Installation und Sicherungen. Das [Impressum](impressum.html) ist ohne Anmeldung erreichbar.
 
@@ -30,4 +30,4 @@ Die SQL-Dateien wurden mit der Supabase-CLI angelegt und mit dem verbundenen Dat
 
 ## Veröffentlichung
 
-GitHub Pages veröffentlicht `main` aus `/ (root)`. Alle lokalen Dateien verwenden den Pfad `/rezepte/`; der Wechsel zur Garten-App führt nach `/newgarten/`. Keine Sitzungen oder Tokens werden über Links übertragen.
+GitHub Pages veröffentlicht `main` aus `/ (root)`. Alle lokalen Dateien verwenden den Pfad `/rezepte/`; der Wechsel zur Garten-App führt nach `/garten/`. Keine Sitzungen oder Tokens werden über Links übertragen.

@@ -32,7 +32,7 @@ Abgleich mit app.js, index.html, chef.js, ei.html und der bisherigen Bedienungsa
 
 ## Abgrenzung
 - Rezeptfunktionen im Repository `rezepte` und Supabase-Projekt `kzxzhpebugvzyqfjqedx` umbauen.
-- Zusätzlich autorisiert: gemeinsamer Forum-Zugang, gegenseitige App-Verlinkung und Scrollsperre für Dialoge auch in `newgarten`. Bestehende Gartenfunktionen und Gartendatensätze erhalten.
+- Zusätzlich autorisiert: gemeinsamer Forum-Zugang, gegenseitige App-Verlinkung und Scrollsperre für Dialoge auch in `garten`. Bestehende Gartenfunktionen und Gartendatensätze erhalten.
 - Einen mutmaßlich kompromittierten KI-Schlüssel nicht wiederverwenden. Widerruf beim Anbieter separat erledigen.
 
 Die Umsetzung wird zusätzlich durch automatisierte Fachlogik-/Backendtests, Browserprüfungen und Live-Zugriffsprüfungen verifiziert.

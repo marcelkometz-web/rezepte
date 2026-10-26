@@ -7158,8 +7158,8 @@ ${n}`), u.currentTarget), "button secondary"), S("Drucken / als PDF", () => Ed(t
         te(e, async () => {
           let l = String(s.get("email") || "").trim(), c = String(s.get("password") || "");
           if (Ae === "login") C(await $().auth.signInWithPassword({ email: l, password: c }));
-          else if (Ae === "register") C(await $().auth.signUp({ email: l, password: c, options: { emailRedirectTo: location.origin + "/newgarten/" } })), J("Pr\xFCfe dein Postfach und best\xE4tige deine E-Mail-Adresse. Die Best\xE4tigung muss im selben Browser ge\xF6ffnet werden."), Ae = "login", ue();
-          else if (Ae === "reset") C(await $().auth.resetPasswordForEmail(l, { redirectTo: location.origin + "/newgarten/" })), J("Wenn das Konto existiert, erh\xE4ltst du einen Link per E-Mail. \xD6ffne ihn im selben Browser.");
+          else if (Ae === "register") C(await $().auth.signUp({ email: l, password: c, options: { emailRedirectTo: location.origin + "/garten/" } })), J("Pr\xFCfe dein Postfach und best\xE4tige deine E-Mail-Adresse. Die Best\xE4tigung muss im selben Browser ge\xF6ffnet werden."), Ae = "login", ue();
+          else if (Ae === "reset") C(await $().auth.resetPasswordForEmail(l, { redirectTo: location.origin + "/garten/" })), J("Wenn das Konto existiert, erh\xE4ltst du einen Link per E-Mail. \xD6ffne ihn im selben Browser.");
           else {
             if (bt && c !== s.get("confirm_password")) throw new Error("Die Passw\xF6rter stimmen nicht \xFCberein.");
             if (C(await $().auth.updateUser({ password: c })), bt) {
@@ -7261,7 +7261,7 @@ ${n}`), u.currentTarget), "button secondary"), S("Drucken / als PDF", () => Ed(t
       if(!p.user||Ge)return xe.replaceChildren(Dd());
       if(!p.data)return xe.replaceChildren(o('main',{class:'setup-page'},lt('Die Anmeldung konnte nicht geprüft werden.',p.error||'Bitte Verbindung prüfen.',S('Erneut versuchen',()=>he())),S('Abmelden',pr,'text-button')));
       if(p.data.capabilities?.blocked)return xe.replaceChildren(o('main',{class:'setup-page'},lt('Dein Zugang ist gesperrt.','Bitte den Betreiber kontaktieren.'),S('Abmelden',pr,'button')));
-      if(!p.data.membership)return xe.replaceChildren(o('main',{class:'setup-page'},o('h1',{},'Fast geschafft.'),o('p',{},'Dein bestätigtes Konto muss zuerst vom Betreiber freigeschaltet werden. Garten und Rezepte verwenden denselben Zugang.'),S('Freigabe prüfen',()=>he(),'button secondary'),S('Abmelden',pr,'text-button'),o('a',{href:'/newgarten/',class:'text-button'},'Zur Garten-App')));
+      if(!p.data.membership)return xe.replaceChildren(o('main',{class:'setup-page'},o('h1',{},'Fast geschafft.'),o('p',{},'Dein bestätigtes Konto muss zuerst vom Betreiber freigeschaltet werden. Garten und Rezepte verwenden denselben Zugang.'),S('Freigabe prüfen',()=>he(),'button secondary'),S('Abmelden',pr,'text-button'),o('a',{href:'/garten/',class:'text-button'},'Zur Garten-App')));
       xe.replaceChildren(RX.render());Oa();
     }
     function Bd() {
