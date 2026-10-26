@@ -62,7 +62,7 @@ import { createRecipeController } from './recipes-ui.js';
         }), m(), a.waiting || s ? "waiting" : "current";
       } };
     }
-    var zi = [{ id: "apple", label: "iPhone / iPad", steps: ["Die Garten-App in Safari \xF6ffnen. Falls du in einer anderen App bist, den Link zuerst in Safari \xF6ffnen.", "Im Browser auf \u201ETeilen\u201C und dann \u201EZum Home-Bildschirm\u201C tippen. Je nach Version steht der Eintrag unter \u201EMehr\u201C.", "Falls angeboten, \u201EAls Web-App \xF6ffnen\u201C einschalten und mit \u201EHinzuf\xFCgen\u201C best\xE4tigen. Danach das Gartensymbol auf dem Home-Bildschirm \xF6ffnen."] }, { id: "android", label: "Android", steps: ["Die Garten-App in Chrome, Edge oder Samsung Internet \xF6ffnen.", "Im Browsermen\xFC \u201EApp installieren\u201C oder \u201EZum Startbildschirm hinzuf\xFCgen\u201C w\xE4hlen. In Samsung Internet kann der Eintrag \u201ESeite hinzuf\xFCgen zu\u201C hei\xDFen.", "Die Installation auf dem Ger\xE4t best\xE4tigen. Danach das Gartensymbol im App-Men\xFC oder auf dem Startbildschirm \xF6ffnen."] }, { id: "windows", label: "Windows", steps: ["Die Garten-App in Microsoft Edge oder Google Chrome \xF6ffnen.", "Auf das Installationssymbol in der Adressleiste klicken. Alternativ im Browsermen\xFC unter \u201EApps\u201C oder \u201ESpeichern und teilen\u201C nach \u201EDiese Seite als App installieren\u201C suchen.", "Im Browser best\xE4tigen. Die App l\xE4sst sich anschlie\xDFend \xFCber das Startmen\xFC \xF6ffnen und dort an die Taskleiste anheften."] }, { id: "mac", label: "Mac", steps: ["In Safari ab macOS Sonoma \u201EAblage \u2192 Zum Dock hinzuf\xFCgen\u201C w\xE4hlen und best\xE4tigen.", "Alternativ die Garten-App in Chrome oder Edge \xF6ffnen und das Installationssymbol in der Adressleiste oder den App-Eintrag im Browsermen\xFC verwenden.", "Danach das Gartensymbol im Dock oder im App-Men\xFC \xF6ffnen."] }, { id: "other", label: "Anderes Ger\xE4t", steps: ["Die Garten-App in einem aktuellen Browser \xF6ffnen. Im Browsermen\xFC nach \u201EApp installieren\u201C oder \u201EZum Startbildschirm hinzuf\xFCgen\u201C suchen.", "Wenn dein Browser diese Funktion nicht anbietet, kannst du die Garten-App weiterhin als Webseite oder \xFCber ein Lesezeichen verwenden."] }];
+    var zi = [{ id: "apple", label: "iPhone / iPad", steps: ["Die Rezepte-App in Safari \xF6ffnen. Falls du in einer anderen App bist, den Link zuerst in Safari \xF6ffnen.", "Im Browser auf \u201ETeilen\u201C und dann \u201EZum Home-Bildschirm\u201C tippen. Je nach Version steht der Eintrag unter \u201EMehr\u201C.", "Falls angeboten, \u201EAls Web-App \xF6ffnen\u201C einschalten und mit \u201EHinzuf\xFCgen\u201C best\xE4tigen. Danach das Rezeptesymbol auf dem Home-Bildschirm \xF6ffnen."] }, { id: "android", label: "Android", steps: ["Die Rezepte-App in Chrome, Edge oder Samsung Internet \xF6ffnen.", "Im Browsermen\xFC \u201EApp installieren\u201C oder \u201EZum Startbildschirm hinzuf\xFCgen\u201C w\xE4hlen. In Samsung Internet kann der Eintrag \u201ESeite hinzuf\xFCgen zu\u201C hei\xDFen.", "Die Installation auf dem Ger\xE4t best\xE4tigen. Danach das Rezeptesymbol im App-Men\xFC oder auf dem Startbildschirm \xF6ffnen."] }, { id: "windows", label: "Windows", steps: ["Die Garten-App in Microsoft Edge oder Google Chrome \xF6ffnen.", "Auf das Installationssymbol in der Adressleiste klicken. Alternativ im Browsermen\xFC unter \u201EApps\u201C oder \u201ESpeichern und teilen\u201C nach \u201EDiese Seite als App installieren\u201C suchen.", "Im Browser best\xE4tigen. Die App l\xE4sst sich anschlie\xDFend \xFCber das Startmen\xFC \xF6ffnen und dort an die Taskleiste anheften."] }, { id: "mac", label: "Mac", steps: ["In Safari ab macOS Sonoma \u201EAblage \u2192 Zum Dock hinzuf\xFCgen\u201C w\xE4hlen und best\xE4tigen.", "Alternativ die Rezepte-App in Chrome oder Edge \xF6ffnen und das Installationssymbol in der Adressleiste oder den App-Eintrag im Browsermen\xFC verwenden.", "Danach das Rezeptesymbol im Dock oder im App-Men\xFC \xF6ffnen."] }, { id: "other", label: "Anderes Ger\xE4t", steps: ["Die Rezepte-App in einem aktuellen Browser \xF6ffnen. Im Browsermen\xFC nach \u201EApp installieren\u201C oder \u201EZum Startbildschirm hinzuf\xFCgen\u201C suchen.", "Wenn dein Browser diese Funktion nicht anbietet, kannst du die Rezepte-App weiterhin als Webseite oder \xFCber ein Lesezeichen verwenden."] }];
     function qa(t = {}) {
       let e = t.userAgent || "";
       return /iPhone|iPad|iPod/i.test(e) || /Mac/i.test(t.platform || "") && t.maxTouchPoints > 1 ? "apple" : /Android/i.test(e) ? "android" : /Windows/i.test(e) ? "windows" : /Macintosh|Mac OS X/i.test(e) ? "mac" : "other";
@@ -6807,6 +6807,7 @@ Eure Ideen wachsen weiter.`, description: "Ein guter Platz f\xFCr Gartenpl\xE4ne
       i && (i.textContent = ""), n.forEach((a) => a.disabled = true), t.setAttribute("aria-busy", "true");
       try {
         await e();
+        delete t.dataset.dirty;
       } catch (a) {
         i ? i.textContent = Ue(a) : J(Ue(a), true);
       } finally {
@@ -6825,11 +6826,24 @@ Eure Ideen wachsen weiter.`, description: "Ein guter Platz f\xFCr Gartenpl\xE4ne
       for (let n of ["--dialog-scroll-top", "--dialog-scroll-left", "--dialog-scroll-padding"]) document.body.style.removeProperty(n);
       window.scrollTo(t, e);
     }
+    function hasUnsavedDialog() {
+      return j.open && !!j.querySelector("form[data-dirty]");
+    }
+    function confirmDiscardDialog() {
+      return !hasUnsavedDialog() || confirm("Du hast ungespeicherte Eingaben. Wirklich schließen?");
+    }
+    for (const eventName of ["input", "change"]) j.addEventListener(eventName, event => {
+      const form = event.target.closest("form");
+      if (form && event.target.type !== "search") form.dataset.dirty = "true";
+    });
+    j.addEventListener("cancel", event => {
+      if (!confirmDiscardDialog()) event.preventDefault();
+    });
     function se(t, e, { className: n = "", heading: r = null, cleanup: i = () => {
     } } = {}) {
       ki(), ki = i, pd();
       try {
-        j.open && j.close(), j.className = n, j.replaceChildren(o("div", { class: "dialog-close-rail" }, S("\u2715", () => j.close(), "dialog-close-button", { "aria-label": "Dialog schlie\xDFen", title: "Fenster schlie\xDFen" })), o("div", { class: "dialog-content" }, r || o("div", { class: "dialog-heading" }, o("div", {}, o("p", { class: "eyebrow" }, "REZEPTE"), o("h2", { id: "dialog-title" }, t))), e)), j.showModal();
+        j.open && j.close(), j.className = n, j.replaceChildren(o("div", { class: "dialog-close-rail" }, S("\u2715", () => { if (confirmDiscardDialog()) j.close(); }, "dialog-close-button", { "aria-label": "Dialog schlie\xDFen", title: "Fenster schlie\xDFen" })), o("div", { class: "dialog-content" }, r || o("div", { class: "dialog-heading" }, o("div", {}, o("p", { class: "eyebrow" }, "REZEPTE"), o("h2", { id: "dialog-title" }, t))), e)), j.showModal();
       } catch (a) {
         throw j.open || pl(), a;
       }
@@ -6843,7 +6857,7 @@ Eure Ideen wachsen weiter.`, description: "Ein guter Platz f\xFCr Gartenpl\xE4ne
       }
     });
     window.addEventListener("beforeunload", (t) => {
-      [...ot.values()].some((e) => e.draft.state().dirty) && (t.preventDefault(), t.returnValue = "");
+      (hasUnsavedDialog() || [...ot.values()].some((e) => e.draft.state().dirty)) && (t.preventDefault(), t.returnValue = "");
     });
     var md = 0;
     function G(t, e, n = "", r = {}) {
@@ -6868,7 +6882,7 @@ Eure Ideen wachsen weiter.`, description: "Ein guter Platz f\xFCr Gartenpl\xE4ne
       return o("div", { class: "season-grid", role: "group", "aria-label": "Jahreszeit ausw\xE4hlen" }, lr.map((t) => S([o("span", { class: "season-preview", "aria-hidden": "true" }, o("span", { class: "season-preview-sun" }), o("span", { class: "season-preview-icon" }, t.icon), o("span", { class: "season-preview-ground" })), o("span", { class: "season-choice-copy" }, o("strong", {}, t.name), o("span", {}, t.palette)), o("span", { class: "season-check", "aria-hidden": "true" }, t.id === je.id ? "\u2713" : "")], () => bd(t.id), "season-option", { "data-season-choice": t.id, "aria-label": `${t.name}-Design ausw\xE4hlen`, "aria-pressed": String(t.id === je.id) })));
     }
     function wd() {
-      se("Vier Jahreszeiten. Dein Garten.", o("div", { class: "season-dialog-copy" }, o("p", { class: "muted" }, "Ein vertrauter Garten. Vier Farben f\xFCr eure Jahreszeiten."), bl(), o("p", { class: "season-selection-status", "data-season-status": "", role: "status" }, `${je.name} ist ausgew\xE4hlt. Die Gestaltung gilt auf diesem Ger\xE4t.`), ce(S("Fertig", () => j.close()))));
+      se("Vier Jahreszeiten. Eure Küche.", o("div", { class: "season-dialog-copy" }, o("p", { class: "muted" }, "Eure Küche. Vier Farben für eure Jahreszeiten."), bl(), o("p", { class: "season-selection-status", "data-season-status": "", role: "status" }, `${je.name} ist ausgew\xE4hlt. Die Gestaltung gilt auf diesem Ger\xE4t.`), ce(S("Fertig", () => j.close()))));
     }
     function yd() {
       return o("section", { class: "panel appearance-panel" }, o("p", { class: "eyebrow" }, "DEIN GARTEN. DEINE FARBEN."), o("h2", {}, "Im Wandel der Jahreszeiten."), o("p", { class: "muted" }, "W\xE4hle die Stimmung, die gerade zu dir passt. Dein ganzes Gartenbuch bekommt die passenden Farben."), bl(), o("p", { class: "season-selection-status", "data-season-status": "", role: "status" }, `${je.name} ist ausgew\xE4hlt. Die Gestaltung gilt auf diesem Ger\xE4t.`));
@@ -6923,7 +6937,7 @@ Eure Ideen wachsen weiter.`, description: "Ein guter Platz f\xFCr Gartenpl\xE4ne
       };
       s(Pa.state());
       let l = Pa.subscribe(s);
-      se("Web-App installieren", o("div", { class: "installation-guide" }, o("p", { class: "muted" }, "Ein Gartensymbol und ein eigenes App-Fenster \u2013 ohne App-Store-Konto. Die Installation best\xE4tigst du auf deinem Ger\xE4t."), e, t, o("label", { class: "field" }, o("span", {}, "Dein Ger\xE4t"), r), i, E("Men\xFCnamen und Verf\xFCgbarkeit h\xE4ngen von Browser, Systemversion und Ger\xE4teeinstellungen ab. Bei einem bereits installierten Gartensymbol ist keine neue Installation n\xF6tig."), E("Nach der Installation kann eine erneute Anmeldung n\xF6tig sein. Kamera, Teilen, Kalender und Haptik richten sich nach den M\xF6glichkeiten deines Browsers.")), { cleanup: l });
+      se("Web-App installieren", o("div", { class: "installation-guide" }, o("p", { class: "muted" }, "Ein Rezeptesymbol und ein eigenes App-Fenster \u2013 ohne App-Store-Konto. Die Installation best\xE4tigst du auf deinem Ger\xE4t."), e, t, o("label", { class: "field" }, o("span", {}, "Dein Ger\xE4t"), r), i, E("Men\xFCnamen und Verf\xFCgbarkeit h\xE4ngen von Browser, Systemversion und Ger\xE4teeinstellungen ab. Bei einem bereits installierten Rezeptesymbol ist keine neue Installation n\xF6tig."), E("Nach der Installation kann eine erneute Anmeldung n\xF6tig sein. Kamera, Teilen, Kalender und Haptik richten sich nach den M\xF6glichkeiten deines Browsers.")), { cleanup: l });
     }
     function Ct(){return RX.footer();}
 
