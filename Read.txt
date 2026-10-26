@@ -83,7 +83,7 @@ noch vorhanden ist. Das Entfernen aus Favoriten löscht kein Rezept.
 5. REZEPTDETAILS UND PORTIONEN
 Ein Rezept über Bild, Emoji oder Titel öffnen. Die Portionszahl lässt sich
 von 1 bis 20 einstellen. Zutatenmengen werden einschließlich Dezimalzahlen,
-Brüchen wie 1/2 und ½ sowie Mengenbereichen wie 350–400 g umgerechnet.
+Brüchen wie 1/2, ½ und 1½ sowie Mengenbereichen wie 350–400 g umgerechnet.
 Mengen ohne Zahl, zum Beispiel „Salz nach Geschmack“, bleiben unverändert.
 
 Die angezeigten Nährwerte beziehen sich auf die gewählte Gesamtmenge.
@@ -129,6 +129,12 @@ Alle freigeschalteten Mitglieder sehen und bearbeiten dieselbe Liste.
 Änderungssignale führen zu einem automatischen Abgleich. Geöffnete Fenster
 und ungespeicherte Formulare werden dabei nicht einfach überschrieben.
 Zusätzlich gibt es einen regelmäßigen Abgleich und „Aktualisieren“.
+
+Ungespeicherte Formulareingaben bleiben bei einem fehlgeschlagenen Speichern
+erhalten. Beim Schließen mit × oder Escape fragt die App nach, bevor sie
+ungespeicherte Eingaben verwirft. „Abbrechen“ verwirft Eingaben ausdrücklich.
+Tipps im Rezept bleiben auch bei einem Wechsel der Portionszahl erhalten,
+bis sie gespeichert oder bewusst verworfen werden.
 
 „Per WhatsApp teilen“ öffnet WhatsApp mit dem vorbereiteten Text. Erst du
 wählst den Empfänger und sendest die Nachricht. Die App verschickt selbst

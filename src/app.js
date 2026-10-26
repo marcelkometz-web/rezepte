@@ -6807,7 +6807,8 @@ Eure Ideen wachsen weiter.`, description: "Ein guter Platz f\xFCr Gartenpl\xE4ne
       i && (i.textContent = ""), n.forEach((a) => a.disabled = true), t.setAttribute("aria-busy", "true");
       try {
         await e();
-        delete t.dataset.dirty;
+        // Filling a draft is a successful action, but it is not a saved form.
+        if (!t.isConnected || !j.open || !j.contains(t)) delete t.dataset.dirty;
       } catch (a) {
         i ? i.textContent = Ue(a) : J(Ue(a), true);
       } finally {
