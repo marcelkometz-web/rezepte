@@ -37,3 +37,7 @@ Die SQL-Dateien wurden mit der Supabase-CLI angelegt und mit dem verbundenen Dat
 ## Veröffentlichung
 
 GitHub Pages veröffentlicht `main` aus `/ (root)`. Alle lokalen Dateien verwenden den Pfad `/rezepte/`; der Wechsel zur Garten-App führt nach `/garten/`. Keine Sitzungen oder Tokens werden über Links übertragen.
+
+## Gemeinsame Anmeldung und Wiederherstellung
+
+Garten, Rezepte und Abnehmen teilen ihre Supabase-Anmeldung im lokalen Browser-Speicher. Nach zehn Minuten ohne Bedienung dieser Apps wird gemeinsam abgemeldet; Abmelden in einem Tab beendet alle drei App-Anmeldungen. Die einzelnen App-Freigaben werden weiterhin serverseitig geprüft. `src/shared-auth.mjs` entspricht dem Modul in Abnehmen. „Passwort vergessen?“ kehrt per PKCE in dieselbe App zurück und fordert eine doppelte neue Passwort-Eingabe. Ungültige oder im falschen Browser geöffnete Links führen zu einer neuen Anforderung.

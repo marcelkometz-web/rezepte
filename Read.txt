@@ -19,11 +19,11 @@ Keine neue eigene Familie in der Garten-App anlegen, wenn ihr zur bestehenden
 Familie gehören möchtet. Eine Registrierung allein gibt keinen Zugriff auf
 eure Rezepte, Einkaufsliste oder das Familienforum.
 
-Bestätigungs- und Wiederherstellungslinks führen zur gemeinsamen Garten-App.
-Öffne sie im selben Browser, lege bei einer Einladung dein eigenes Passwort
-fest und wechsle anschließend über „Zu den Rezepten“ zurück.
+Bestätigungslinks und Einladungen führen zur gemeinsamen Garten-App.
+Passwort-Wiederherstellungslinks führen zurück zur App, in der sie angefordert wurden.
+Öffne den neuesten Link im selben Browser und lege dein eigenes Passwort fest.
 
-Die Anmeldung wird im Sitzungsspeicher des Tabs verwaltet. Auf gemeinsam
+Die gemeinsame Anmeldung für Garten, Rezepte und Abnehmen wird im lokalen Browserspeicher dieses Geräts verwaltet. Nach zehn Minuten ohne Bedienung in diesen Apps endet sie; Abmelden gilt für alle drei Apps. Private Fotos und App-Inhalte werden dafür nicht lokal gespeichert. Auf gemeinsam
 genutzten Geräten immer ausdrücklich abmelden. Nach einer Passwortänderung
 oder abgelaufenen Sitzung erneut anmelden. Die App liest euer Passwort nicht
 aus der Datenbank zurück und speichert es nicht als Klartext im Browser.
@@ -332,3 +332,9 @@ In neuen Rezepten öffnet „Zutatenberechnung & Markenwerte“ die Gramm-Mengen
 Standardquelle: Max Rubner-Institut (2025), Bundeslebensmittelschlüssel Version 4.0, CC BY 4.0, DOI 10.25826/Data20251217-134202-0, https://www.blsdb.de/download. Einzelne Gewürze verwenden USDA FoodData Central SR Legacy. Quelle und Code stehen je Zutat in der Berechnungsbasis. Das sind nachvollziehbare Referenzberechnungen, keine Laboranalyse des fertigen Gerichts. Marken, essbarer Anteil, Gar- und Abtropfverluste verändern reale Werte. Die 263 Originalrezepte wurden nicht neu berechnet.
 
 Im Tab Heute öffnen sich die Rezeptideen in einem neuen Tab. Der Menüknopf bereitet eine Anfrage mit passenden Rezepten vor; sie wird erst nach eurer Bestätigung an den Küchen-Assistenten gesendet.
+
+
+GEMEINSAME ANMELDUNG UND PASSWORT VERGESSEN
+Garten, Rezepte und Abnehmen übernehmen im selben Browser dieselbe Anmeldung, auch in neu geöffneten Tabs. Ein Abmelden gilt für alle drei Apps. Nach zehn Minuten ohne Bedienung in diesen Apps wird gemeinsam abgemeldet. Andere Browser oder getrennte App-Browser auf dem Startbildschirm können einen eigenen Anmeldespeicher haben.
+
+„Passwort vergessen?“ führt nach dem Link aus der E-Mail wieder in die App zurück, aus der der Link angefordert wurde. Im selben Browser öffnen, das neue Passwort zweimal eingeben und danach neu anmelden. Das Passwort gilt für alle drei Apps. Wenn ein Link abgelaufen ist oder zum falschen Browser gehört, wird eine neue Link-Anforderung angeboten.
