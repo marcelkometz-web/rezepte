@@ -1,6 +1,7 @@
+import {selectDailyRecipes} from '../src/daily-selection.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {categories,matches,scaleLine,ingredientLines,nutrition,cycleInfo,importRows,meals} from '../src/domain.mjs';
+import {categories,matches,isSalad,scaleLine,ingredientLines,nutrition,cycleInfo,importRows,meals} from '../src/domain.mjs';
 import {SAYINGS,seasonalSaying,currentSeason,nextSaying} from '../src/seasons.mjs';
 test('historical category formats and several meal types remain searchable',()=>{
  for(const value of ['{mittag,abend,lowcarb}','["mittag","abend","lowcarb"]',['mittag','abend','lowcarb']]){
@@ -20,6 +21,19 @@ test('ingredient search combines all words and normalizes German spellings witho
 test('high-protein results require a known finite protein value above the threshold',()=>{
  for(const prot of [undefined,null,'unbekannt',Infinity,24.9])assert.equal(matches({title:'Test',prot},'','highprotein'),false);
  for(const prot of [25,'25',30])assert.equal(matches({title:'Test',prot},'','highprotein'),true);
+});
+test('salads include explicit tags and historical salad titles without hiding their meal slots',()=>{
+ const tagged={title:'Mediterrane Bowl',category:'["mittag","abend","salate","kalorienbewusst"]'};
+ assert.ok(isSalad(tagged));assert.ok(matches(tagged,'','salate'));assert.deepEqual(meals(tagged),['mittag','abend']);assert.ok(matches(tagged,'','kalorienbewusst'));
+ assert.ok(isSalad({title:'Leichter Hähnchen-Avocado-Salat',category:'{abend}'}));assert.ok(isSalad({title:'Thunfischsalat',category:'{}'}));assert.equal(isSalad({title:'Blattsalat-Wrap',category:'{abend}'}),true);assert.equal(isSalad({title:'Rührei',category:'{fruehstueck}'}),false);
+});
+test('dessert has its own category while savory breakfast muffins retain their categories',()=>{
+ assert.deepEqual(meals({title:'Creme',category:'{dessert,lowcarb}'}),['dessert']);assert.ok(matches({title:'Creme',category:'{dessert}'},'','dessert'));
+ assert.deepEqual(meals({title:'Spinat-Muffins',category:'{fruehstueck,snacks}'}),['fruehstueck','snacks']);
+ assert.ok(meals({title:'Schokopudding',category:'{snacks}'}).includes('dessert'));
+});
+test('escaped legacy JSON categories are parsed without backslash tags',()=>{
+ const category='[\\"snacks\\",\\"lowcarb\\"]';assert.deepEqual(categories(category),['snacks','lowcarb']);assert.ok(matches({title:'Test',category},'','lowcarb'));
 });
 test('portion conversion preserves fractions, decimal quantities, ranges and salt without a quantity',()=>{
  assert.equal(scaleLine('• 1/3 TL Kräuter',3),'1 TL Kräuter');assert.equal(scaleLine('½ Zwiebel',2),'1 Zwiebel');
@@ -78,4 +92,8 @@ test('malformed saved saying preferences recover without repeating the last vali
  assert.notEqual(result.text,SAYINGS.autumn[1]);
  assert.ok(result.state.history.some(x=>x.id==='autumn:1'));
  assert.ok(result.state.history.every(x=>Number.isFinite(x.at)&&!x.id.includes(':01')));
+});
+test('daily ideas prefer mindful main meals when available',()=>{
+ const pool=[{id:1,title:'Old dessert',category:'["dessert"]'},{id:2,title:'New breakfast',category:'["fruehstueck","kalorienbewusst"]'},{id:3,title:'New lunch',category:'["mittag","kalorienbewusst"]'},{id:4,title:'New dinner',category:'["abend","kalorienbewusst"]'}];
+ const ideas=selectDailyRecipes(pool,'2026-10-27');assert.deepEqual(new Set(ideas.map(r=>r.id)),new Set([3,4]));
 });

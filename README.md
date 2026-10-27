@@ -2,9 +2,15 @@
 
 Private Familien-App: https://marcelkometz-web.github.io/rezepte/
 
-Gemeinsame Anmeldung, Nutzerfreigabe, freiwillige Profile und Familienforum mit [Ramonas Garten](https://marcelkometz-web.github.io/garten/). Die 263 übernommenen Rezepte liegen weiterhin in ihrem eigenen Supabase-Projekt.
+Gemeinsame Anmeldung, Nutzerfreigabe, freiwillige Profile und Familienforum mit [Ramonas Garten](https://marcelkometz-web.github.io/garten/). Die 263 Originalrezepte und 120 ergänzte kalorienbewusste Rezepte liegen in ihrem eigenen Supabase-Projekt (insgesamt 383).
 
 Die vollständige [Bedienhilfe](Read.txt) erklärt alle Funktionen, Rechte, KI-Zugänge, Installation und Sicherungen. Das [Impressum](impressum.html) ist ohne Anmeldung erreichbar.
+
+## Neue Rezepte und Zutatenberechnung
+
+25 Frühstücke, 30 Mittagessen, 25 Abendessen, 20 Desserts und zusätzlich 20 Salate ergänzen die Sammlung. Eigenständige Filter führen zu **Salate**, **Nachtisch** und **Kalorienbewusst**. 104 der neuen Rezepte enthalten mindestens 25 g Eiweiß; 88 liegen bei höchstens 30 g Kohlenhydraten pro Portion. Alle Zutatenmengen, Öle, Dressings und Toppings sind in der Berechnung enthalten.
+
+Die neuen Rezepte speichern ihre Zutatenbasis mit Gramm-Mengen, Quellen und Werten pro 100 g. Über **Zutatenberechnung & Markenwerte** lassen sich Mengen und konkrete Packungsangaben neu berechnen; das Speichern erfordert die bestehenden Bearbeitungsrechte. Details und Grenzen: [Nährwertberechnung](NUTRITION.md). Die 263 Originalrezepte wurden nicht umgeschrieben.
 
 ## Entwicklung
 

@@ -4,7 +4,7 @@ Abgleich mit app.js, index.html, chef.js, ei.html und der bisherigen Bedienungsa
 
 ## Rezepte
 - Alle 263 Originaldatensätze einschließlich Zutaten, aller Nährwertfelder, Vorbereitung, Herd, Ofen, Airfryer, Tipps und vorhandener Gesundheitshinweise erhalten.
-- Mahlzeiten: Frühstück, Mittag, Abend, Snacks/Desserts; zusätzliche Filter für Low-Carb, High-Protein ab 25 g, Airfryer und Favoriten.
+- Mahlzeiten: Frühstück, Mittag, Abend, Nachtisch und Snacks; zusätzliche Filter für Salate, Kalorienbewusst, Low-Carb, High-Protein ab 25 g, Airfryer und Favoriten.
 - Suche mit mehreren Zutaten gleichzeitig, vier Gruppen für Zutaten-Schnellauswahl, Suchfeld leeren und Filter zurücksetzen.
 - Rezeptdetails, Bilder oder Emoji, gespeicherte Bewertung A–E und klare Kennzeichnung als vorhandene Einschätzung.
 - 1–20 Portionen, Mengen einschließlich Brüchen und Bereichen skalieren; Nährwerte auf die ausgewählte Gesamtmenge beziehen.
@@ -46,3 +46,8 @@ Die Umsetzung wird zusätzlich durch automatisierte Fachlogik-/Backendtests, Bro
 - In beiden Apps zur jeweils anderen App wechseln können.
 - In beiden Apps Hintergrundscrollen bei geöffnetem Dialog sperren und nach dem Schließen die Scrollposition wiederherstellen.
 - Anonyme Zugriffe auf geschützte Inhalte, Schreibzugriffe ohne Freigabe und Abruf von KI-Schlüsseln ausdrücklich testen.
+
+## Neue kalorienbewusste Sammlung
+- 100 neue Rezepte für Frühstück, Mittag, Abend und Dessert sowie 20 zusätzliche Salate.
+- Zutatenrechnung mit Gramm-Mengen, BLS-4.0-/USDA-Referenzen, Packungswerten und Neubewertung der Low-Carb-/Proteinfilter nach Änderungen.
+- Fehlende Referenzwerte bleiben unbekannt. Originalrezepte behalten ihre vorhandenen Werte; keine erfundenen Gesundheitsnoten.

@@ -1,4 +1,4 @@
-export const MEALS = { fruehstueck:'Frühstück', mittag:'Mittagessen', abend:'Abendessen', snacks:'Snacks & Süßes' };
+export const MEALS = { fruehstueck:'Frühstück', mittag:'Mittagessen', abend:'Abendessen', dessert:'Nachtisch', snacks:'Snacks' };
 export const SIDES = {
   keine:{ name:'Ohne Extra-Beilage', kcal:0, prot:0, kh:0, sugar:0, fat:0, amount:'' },
   zoodles:{ name:'Zucchini-Nudeln · 150 g', kcal:22, prot:1.8, kh:3.1, sugar:2.2, fat:.4, amount:'150 g Zucchini-Nudeln' },
@@ -16,15 +16,25 @@ export const text = value => String(value ?? '').replace(/\\r\\n|\\n|\\r/g,'\n')
 export const fold = value => text(value).toLocaleLowerCase('de').replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 export function categories(value) {
   if(Array.isArray(value)) return value.map(x=>fold(text(x).trim())).filter(Boolean);
-  const s=String(value??'').trim();
-  try { const v=JSON.parse(s); if(Array.isArray(v)) return categories(v); } catch {}
+  let s=String(value??'').trim();
+  // Some older rows contain JSON strings whose quote escapes were stored twice.
+  for(let i=0;i<3;i++){
+    try { const v=JSON.parse(s); if(Array.isArray(v)) return categories(v); if(typeof v==='string'){s=v.trim();continue;} } catch {}
+    if(s.includes('\\"')){s=s.replace(/\\"/g,'"');continue;}break;
+  }
   return s.replace(/[{}[\]"]/g,'').split(',').map(x=>fold(x.trim())).filter(Boolean);
+}
+export function isSalad(recipe) {
+  const cats=categories(recipe.category);
+  return cats.some(c=>['salat','salate','salad','salads'].includes(c)) || /(?:^|[\s-])[a-z]*salat(?:[\s-]|$)/.test(fold(recipe.title));
 }
 export function meals(recipe) {
   const cats=categories(recipe.category), explicit=Object.keys(MEALS).filter(c=>cats.includes(c));
+  if(cats.some(c=>['nachtisch','suessspeise','desserts'].includes(c))&&!explicit.includes('dessert'))explicit.push('dessert');
+  if(cats.includes('snacks')&&/dessert|nachtisch|kuchen|mousse|pudding|tiramisu|praline/.test(fold(recipe.title))&&!explicit.includes('dessert'))explicit.push('dessert');
   if(explicit.length) return explicit;
   const title=fold(recipe.title);
-  if(cats.includes('dessert')||/dessert|nachtisch|kuchen|muffin/.test(title)) return ['snacks'];
+  if(/dessert|nachtisch|kuchen|mousse|pudding|tiramisu/.test(title)) return ['dessert'];
   if(/fruehstueck/.test(title)) return ['fruehstueck'];
   if(/brot/.test(title)) return ['abend'];
   return ['mittag'];
@@ -35,6 +45,8 @@ export function matches(recipe,query='',filter='all',favorites=[]) {
   if(filter==='airfryer'&&!recipe.airfryer&&!recipe.airfryer_step) return false;
   if(filter==='highprotein'&&(!Number.isFinite(Number(recipe.prot))||Number(recipe.prot)<25)) return false;
   if(filter==='lowcarb'&&!cats.includes('lowcarb')) return false;
+  if(filter==='salate'&&!isSalad(recipe)) return false;
+  if(filter==='kalorienbewusst'&&!cats.includes('kalorienbewusst')) return false;
   if(filter in MEALS&&!meals(recipe).includes(filter)) return false;
   const haystack=fold([recipe.title,recipe.ingredients,recipe.zutaten_liste,recipe.prep,recipe.stove_step,recipe.oven_step,recipe.airfryer_step,recipe.description,recipe.tipps].join(' '));
   return fold(query).split(/[\s,]+/).filter(Boolean).every(term=>haystack.includes(term));

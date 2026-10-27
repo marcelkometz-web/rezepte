@@ -15,3 +15,6 @@ Thumbs.db
 supabase/.temp/
 test-results/
 playwright-report/
+
+# Private Rezeptimporte und Sicherungen gehören nicht in das öffentliche Repository
+private-imports/

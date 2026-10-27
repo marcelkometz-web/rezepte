@@ -322,3 +322,13 @@ persönliche Passwörter, Anbieterlimits und eigene Sicherungen bleiben wichtig.
 BETREIBER
 Marcel Kometz · Manfredstr. 15 · 47178 Duisburg · Deutschland
 Telefon: 0152 03397547 · E-Mail: marcelkometz@icloud.com
+
+
+NEU: SALATE, NACHTISCH UND ZUTATENBERECHNUNG
+Die Sammlung umfasst 383 Rezepte: 263 Originalrezepte und 120 neue kalorienbewusste Ideen (25 Frühstück, 30 Mittag, 25 Abend, 20 Nachtisch und zusätzlich 20 Salate). Die neuen Rezepte kommen ohne zugesetzten Haushaltszucker aus; natürlich vorkommender Zucker wird mitgerechnet. Die Filter Salate, Nachtisch und Kalorienbewusst führen zu den passenden Gerichten.
+
+In neuen Rezepten öffnet „Zutatenberechnung & Markenwerte“ die Gramm-Mengen und Nährwerte pro 100 g jeder Zutat. Öl, Dressing und Toppings sind enthalten. Wer Bearbeitungsrechte hat, kann Mengen verändern und konkrete Packungswerte eintragen. Bei anderen Nährwerten den genauen Produktnamen oder die Quelle angeben. Unbekannte Werte leer lassen. Speichern berechnet die Werte für eine Portion neu; Low-Carb (hier höchstens 30 g Kohlenhydrate pro Portion) und High-Protein (hier mindestens 25 g Eiweiß) werden danach neu zugeordnet.
+
+Standardquelle: Max Rubner-Institut (2025), Bundeslebensmittelschlüssel Version 4.0, CC BY 4.0, DOI 10.25826/Data20251217-134202-0, https://www.blsdb.de/download. Einzelne Gewürze verwenden USDA FoodData Central SR Legacy. Quelle und Code stehen je Zutat in der Berechnungsbasis. Das sind nachvollziehbare Referenzberechnungen, keine Laboranalyse des fertigen Gerichts. Marken, essbarer Anteil, Gar- und Abtropfverluste verändern reale Werte. Die 263 Originalrezepte wurden nicht neu berechnet.
+
+Im Tab Heute öffnen sich die Rezeptideen in einem neuen Tab. Der Menüknopf bereitet eine Anfrage mit passenden Rezepten vor; sie wird erst nach eurer Bestätigung an den Küchen-Assistenten gesendet.
