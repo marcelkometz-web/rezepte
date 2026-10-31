@@ -1,12 +1,16 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {calculateIngredients,roundedNutrition,readNutritionBasis,basisMatchesRecipe,basisIngredientText,NUTRIENTS} from '../src/nutrition-calculation.mjs';
+test('ingredient calculations reject contradictory label values rather than inventing totals',()=>{
+ assert.throws(()=>calculateIngredients([{grams:100,per100:{kcal:100,kh:1,sugar:2,fat:3,sat_fat:1}}]),/widersprechen/);
+ assert.throws(()=>calculateIngredients([{grams:100,per100:{kcal:100,kh:2,sugar:1,fat:3,sat_fat:4}}]),/widersprechen/);
+});
 const food=(label,grams,values)=>({label,grams,per100:Object.fromEntries(NUTRIENTS.map(key=>[key,values[key]??0]))});
 test('ingredient quantities, oils, toppings and portions contribute without intermediate rounding',()=>{
  const ingredients=[food('Quark',180,{kcal:67,prot:12,sugar:4,kh:4,fat:.3}),food('Öl',3,{kcal:900,fat:100}),food('Mandeln',5,{kcal:600,prot:20,fat:50})];
  const total=calculateIngredients(ingredients);assert.ok(Math.abs(total.kcal-177.6)<1e-10);assert.ok(Math.abs(total.prot-22.6)<1e-10);assert.ok(Math.abs(calculateIngredients(ingredients,2).kcal-88.8)<1e-10);assert.equal(roundedNutrition(ingredients).kcal,177.6);
 });
 test('missing source nutrients stay unknown rather than being treated as zero',()=>{
- const a=food('A',100,{kcal:100,sugar:2}),b=food('B',50,{kcal:80});b.per100.sugar=null;
+ const a=food('A',100,{kcal:100,kh:2,sugar:2}),b=food('B',50,{kcal:80});b.per100.sugar=null;
  assert.equal(calculateIngredients([a,b]).sugar,null);assert.equal(calculateIngredients([a,b]).kcal,140);
 });
 test('manually changed nutrition or ingredient text invalidates the source-calculation badge',()=>{

@@ -1,5 +1,5 @@
 REZEPTE – BEDIENHILFE
-Version 4 · Stand: 26. Oktober 2026
+Version 5 · Stand: 31. Oktober 2026
 
 Privates Familienprojekt von Marcel Kometz für Ramona und Marcel.
 Rezepte: https://marcelkometz-web.github.io/rezepte/
@@ -59,7 +59,8 @@ Die Startseite zeigt die Anzahl aller Rezepte und der Gerichte mit mindestens
 Rezepte anzeigen“ kommen die nächsten hinzu. Suche und Filter beziehen sich
 auf den gesamten geladenen Datenbestand, nicht nur auf sichtbare Karten.
 
-Mahlzeiten: Frühstück, Mittagessen, Abendessen, Snacks & Süßes.
+Mahlzeiten: Frühstück, Mittagessen, Abendessen, Nachtisch und Snacks.
+Zusätzlich gibt es einen eigenen Salate-Filter.
 Zusätzliche Filter: Low-Carb, High-Protein, Airfryer und Favoriten.
 Rezepte mit mehreren Mahlzeit-Kategorien können unter mehreren Filtern passen.
 Alte Kategorienformate werden beim Lesen vereinheitlicht.
@@ -325,7 +326,7 @@ Telefon: 0152 03397547 · E-Mail: marcelkometz@icloud.com
 
 
 NEU: SALATE, NACHTISCH UND ZUTATENBERECHNUNG
-Die Sammlung umfasst 383 Rezepte: 263 Originalrezepte und 120 neue kalorienbewusste Ideen (25 Frühstück, 30 Mittag, 25 Abend, 20 Nachtisch und zusätzlich 20 Salate). Die neuen Rezepte kommen ohne zugesetzten Haushaltszucker aus; natürlich vorkommender Zucker wird mitgerechnet. Die Filter Salate, Nachtisch und Kalorienbewusst führen zu den passenden Gerichten.
+Die Erweiterung umfasste beim Import 383 Rezepte: 263 Originalrezepte und 120 neue kalorienbewusste Ideen (25 Frühstück, 30 Mittag, 25 Abend, 20 Nachtisch und zusätzlich 20 Salate). Die neuen Rezepte kommen ohne zugesetzten Haushaltszucker aus; natürlich vorkommender Zucker wird mitgerechnet. Die Filter Salate, Nachtisch und Kalorienbewusst führen zu den passenden Gerichten.
 
 In neuen Rezepten öffnet „Zutatenberechnung & Markenwerte“ die Gramm-Mengen und Nährwerte pro 100 g jeder Zutat. Öl, Dressing und Toppings sind enthalten. Wer Bearbeitungsrechte hat, kann Mengen verändern und konkrete Packungswerte eintragen. Bei anderen Nährwerten den genauen Produktnamen oder die Quelle angeben. Unbekannte Werte leer lassen. Speichern berechnet die Werte für eine Portion neu; Low-Carb (hier höchstens 30 g Kohlenhydrate pro Portion) und High-Protein (hier mindestens 25 g Eiweiß) werden danach neu zugeordnet.
 
@@ -338,3 +339,20 @@ GEMEINSAME ANMELDUNG UND PASSWORT VERGESSEN
 Garten, Rezepte und Abnehmen übernehmen im selben Browser dieselbe Anmeldung, auch in neu geöffneten Tabs. Ein Abmelden gilt für alle drei Apps. Nach zehn Minuten ohne Bedienung in diesen Apps wird gemeinsam abgemeldet. Andere Browser oder getrennte App-Browser auf dem Startbildschirm können einen eigenen Anmeldespeicher haben.
 
 „Passwort vergessen?“ führt nach dem Link aus der E-Mail wieder in die App zurück, aus der der Link angefordert wurde. Im selben Browser öffnen, das neue Passwort zweimal eingeben und danach neu anmelden. Das Passwort gilt für alle drei Apps. Wenn ein Link abgelaufen ist oder zum falschen Browser gehört, wird eine neue Link-Anforderung angeboten.
+
+
+NÄHRWERTE PRÜFEN
+Bei der Bestandsprüfung am 31. Oktober wurden neun ältere Rezepte mit widersprüchlichen Teilnährwerten gefunden (Zucker über Kohlenhydraten oder gesättigte Fette über Gesamtfett). Die betroffenen Werte werden in der Anzeige als unbekannt behandelt und mit einem Hinweis gekennzeichnet. Die Originalangaben bleiben erhalten, bis eine belegte Korrektur vorliegt. Beim Bearbeiten müssen solche Widersprüche korrigiert oder die unbekannten Felder geleert werden. Es werden keine Ersatzwerte erfunden. Die 120 dokumentierten Zutatenberechnungen stimmten bei der Prüfung mit den gespeicherten Ergebnissen überein. Die aktuelle Gesamtzahl der Rezepte steht in der App und kann durch eigene Einträge wachsen.
+
+
+GEMEINSAME APP: UNSER ZUHAUSE
+https://marcelkometz-web.github.io/abnehmen/zuhause/
+Garten, Rezepte und Ramonas Weg öffnen in einer gemeinsamen Oberfläche. Die Navigation unten wechselt den Bereich; bereits geöffnete Formulare bleiben beim Wechsel erhalten. Vor Schließen oder Neuladen trotzdem speichern. Das Fragezeichen oben öffnet allgemeine Hilfe, alle drei Bedienhilfen und Impressum direkt im Fenster. Der Hintergrund ist dabei gesperrt. Private Tagebuchrechte bleiben unabhängig von Garten- und Rezeptrechten. Rezeptideen öffnen weiterhin auf Wunsch einen eigenen Tab. Nicht sichtbare Bereiche pausieren regelmäßige Datenabfragen.
+
+Die App passt sich an Handy, Tablet und Computer an. Aktuelle Browser unter iOS/iPadOS, Android, Windows, macOS und ChromeOS verwenden. Die Funktionsprüfung erfolgte mit Chromium und WebKit in mehreren Bildschirmgrößen; jede tatsächliche Geräte-/Betriebssystemkombination wurde nicht getestet. Speichern und KI benötigen Internet.
+
+BETREIBER & KONTAKT
+Marcel Kometz, Manfredstr. 15, 47178 Duisburg, Deutschland
+Telefon: +49 152 03397547
+E-Mail: marcelkometz@icloud.com
+Das gemeinsame Impressum mit Datenschutzhinweisen gilt für alle drei Apps.

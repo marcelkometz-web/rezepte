@@ -1,6 +1,6 @@
 export const MEALS = { fruehstueck:'Frühstück', mittag:'Mittagessen', abend:'Abendessen', dessert:'Nachtisch', snacks:'Snacks' };
 export const SIDES = {
-  keine:{ name:'Ohne Extra-Beilage', kcal:0, prot:0, kh:0, sugar:0, fat:0, amount:'' },
+  keine:{ name:'Ohne Extra-Beilage', kcal:0, prot:0, kh:0, sugar:0, fat:0, sat_fat:0, fiber:0, salt:0, amount:'' },
   zoodles:{ name:'Zucchini-Nudeln · 150 g', kcal:22, prot:1.8, kh:3.1, sugar:2.2, fat:.4, amount:'150 g Zucchini-Nudeln' },
   protein_nudeln:{ name:'Protein-Nudeln · 100 g', kcal:145, prot:14, kh:18, sugar:1.5, fat:1.8, amount:'100 g gekochte Protein-Nudeln' },
   basmati_reis:{ name:'Basmati-Reis · 100 g', kcal:130, prot:2.7, kh:28, sugar:.1, fat:.3, amount:'100 g gekochter Basmati-Reis' },
@@ -47,6 +47,7 @@ export function matches(recipe,query='',filter='all',favorites=[]) {
   if(filter==='lowcarb'&&!cats.includes('lowcarb')) return false;
   if(filter==='salate'&&!isSalad(recipe)) return false;
   if(filter==='kalorienbewusst'&&!cats.includes('kalorienbewusst')) return false;
+  if(filter==='nutrition-check'&&!nutritionIssues(recipe).length) return false;
   if(filter in MEALS&&!meals(recipe).includes(filter)) return false;
   const haystack=fold([recipe.title,recipe.ingredients,recipe.zutaten_liste,recipe.prep,recipe.stove_step,recipe.oven_step,recipe.airfryer_step,recipe.description,recipe.tipps].join(' '));
   return fold(query).split(/[\s,]+/).filter(Boolean).every(term=>haystack.includes(term));
@@ -77,7 +78,16 @@ export function ingredientLines(recipe,portions=1,side='keine',variation=null) {
 }
 export function nutrition(recipe,portions=1,side='keine',variation=null) {
   const v=variations(recipe)?.[variation]||recipe, s=SIDES[side]||SIDES.keine;
-  return Object.fromEntries(['kcal','prot','kh','sugar','fat','sat_fat','fiber','salt'].map(k=>[k, v[k]===null||v[k]===undefined ? null : Math.round((Number(v[k])+Number(s[k]||0))*portions*100)/100]));
+  const unreliable=new Set(nutritionIssues(v));
+  return Object.fromEntries(['kcal','prot','kh','sugar','fat','sat_fat','fiber','salt'].map(k=>[k, v[k]===null||v[k]===undefined||v[k]===''||s[k]==null||unreliable.has(k) ? null : Math.round((Number(v[k])+Number(s[k]))*portions*100)/100]));
+}
+// A contradictory pair cannot tell us which source value is wrong. Keep both
+// out of totals rather than guessing a replacement or silently clamping one.
+export function nutritionIssues(recipe){
+  const fields=new Set(),keys=['kcal','prot','kh','sugar','fat','sat_fat','fiber','salt'];
+  for(const key of keys)if(recipe[key]!=null&&recipe[key]!==''&&(!Number.isFinite(Number(recipe[key]))||Number(recipe[key])<0))fields.add(key);
+  for(const [part,total]of [['sugar','kh'],['sat_fat','fat']])if(recipe[part]!=null&&recipe[part]!==''&&recipe[total]!=null&&recipe[total]!==''&&Number(recipe[part])>Number(recipe[total])+.01){fields.add(part);fields.add(total);}
+  return [...fields];
 }
 export function cycleInfo(start,length=28,now=new Date()) {
   const n=Number(length);

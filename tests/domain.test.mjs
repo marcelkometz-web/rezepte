@@ -1,7 +1,7 @@
 import {selectDailyRecipes} from '../src/daily-selection.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {categories,matches,isSalad,scaleLine,ingredientLines,nutrition,cycleInfo,importRows,meals} from '../src/domain.mjs';
+import {categories,matches,isSalad,scaleLine,ingredientLines,nutrition,nutritionIssues,cycleInfo,importRows,meals} from '../src/domain.mjs';
 import {SAYINGS,seasonalSaying,currentSeason,nextSaying} from '../src/seasons.mjs';
 test('historical category formats and several meal types remain searchable',()=>{
  for(const value of ['{mittag,abend,lowcarb}','["mittag","abend","lowcarb"]',['mittag','abend','lowcarb']]){
@@ -52,6 +52,17 @@ test('escaped legacy newlines, selected side and chosen dip all use the same por
 });
 test('unknown nutrition stays unknown and zero sugar stays zero',()=>{
  assert.equal(nutrition({kcal:null,sugar:0},3).kcal,null);assert.equal(nutrition({kcal:0,sugar:0},3).sugar,0);
+});
+test('contradictory source pairs stay unknown across portions and side dishes',()=>{
+ const source={kcal:140,prot:3,kh:1.5,sugar:2,fat:14,sat_fat:16,fiber:1,salt:.1};
+ assert.deepEqual(new Set(nutritionIssues(source)),new Set(['kh','sugar','fat','sat_fat']));
+ const result=nutrition(source,2,'basmati_reis');
+ for(const field of ['kh','sugar','fat','sat_fat'])assert.equal(result[field],null);
+ assert.equal(result.kcal,540);assert.equal(source.sugar,2);assert.equal(source.fat,14);
+ assert.equal(nutrition(source,1,'basmati_reis').fiber,null);
+ assert.equal(nutrition(source).fiber,1);
+ assert.deepEqual(nutritionIssues({kh:0,sugar:0,fat:1,sat_fat:1}),[]);
+ assert.deepEqual(nutritionIssues({kcal:-1,prot:'invalid'}),['kcal','prot']);
 });
 test('cycle phases depend on dates, support short cycles and reject future dates',()=>{
  const today=new Date(2026,9,26,12);assert.equal(cycleInfo('2026-10-26',28,today).name,'Menstruation');assert.equal(cycleInfo('2026-10-19',28,today).name,'Follikelphase');assert.equal(cycleInfo('2026-10-13',28,today).name,'Eisprung');assert.equal(cycleInfo('2026-10-05',28,today).name,'Lutealphase');assert.equal(cycleInfo('2026-11-01',28,today),null);

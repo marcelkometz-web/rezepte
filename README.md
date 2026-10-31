@@ -1,10 +1,12 @@
-# Rezepte
+# Rezepte 🍽️
+
+<img src="icon.svg" width="80" height="80" alt="Rezepte">
 
 Private Familien-App: https://marcelkometz-web.github.io/rezepte/
 
-Gemeinsame Anmeldung, Nutzerfreigabe, freiwillige Profile und Familienforum mit [Ramonas Garten](https://marcelkometz-web.github.io/garten/). Die 263 Originalrezepte und 120 ergänzte kalorienbewusste Rezepte liegen in ihrem eigenen Supabase-Projekt (insgesamt 383).
+Gemeinsame Anmeldung, Nutzerfreigabe, freiwillige Profile und Familienforum mit [Ramonas Garten](https://marcelkometz-web.github.io/garten/). Die 263 Originalrezepte und 120 ergänzte kalorienbewusste Rezepte liegen in ihrem eigenen Supabase-Projekt. Beim Import waren es 383; eigene Ergänzungen erhöhen die in der App angezeigte Zahl.
 
-Die vollständige [Bedienhilfe](Read.txt) erklärt alle Funktionen, Rechte, KI-Zugänge, Installation und Sicherungen. Das [Impressum](impressum.html) ist ohne Anmeldung erreichbar.
+Die vollständige [Bedienhilfe](read.html) mit [Textfassung](Read.txt) erklärt alle Funktionen, Rechte, KI-Zugänge, Installation und Sicherungen. Das [Impressum](impressum.html) ist ohne Anmeldung erreichbar.
 
 ## Neue Rezepte und Zutatenberechnung
 
@@ -41,3 +43,11 @@ GitHub Pages veröffentlicht `main` aus `/ (root)`. Alle lokalen Dateien verwend
 ## Gemeinsame Anmeldung und Wiederherstellung
 
 Garten, Rezepte und Abnehmen teilen ihre Supabase-Anmeldung im lokalen Browser-Speicher. Nach zehn Minuten ohne Bedienung dieser Apps wird gemeinsam abgemeldet; Abmelden in einem Tab beendet alle drei App-Anmeldungen. Die einzelnen App-Freigaben werden weiterhin serverseitig geprüft. `src/shared-auth.mjs` entspricht dem Modul in Abnehmen. „Passwort vergessen?“ kehrt per PKCE in dieselbe App zurück und fordert eine doppelte neue Passwort-Eingabe. Ungültige oder im falschen Browser geöffnete Links führen zu einer neuen Anforderung.
+
+## Gemeinsame Oberfläche
+
+[Unser Zuhause](https://marcelkometz-web.github.io/abnehmen/zuhause/) verbindet Garten, Rezepte und Ramonas Fortschritt in einem App-Fenster. Die vorhandene Anmeldung und Kontofreigabe bleibt wirksam. Die gemeinsame Ansicht ist auf die oberste Startseite derselben Origin begrenzt; fremde oder verschachtelte Frames bleiben gesperrt. Nicht sichtbare Bereiche pausieren ihre regelmäßigen Datenabfragen. [Plattform- und Performancebericht](https://github.com/marcelkometz-web/abnehmen/blob/main/docs/plattformen-und-performance-2026-10-31.md).
+
+## Datenqualität und Hilfe
+
+Das gemeinsame Impressum verwendet den bestätigten Betreiberkontakt. Die allgemeine Hilfe und alle drei Bedienhilfen öffnen im gemeinsamen App-Fenster. Neun ältere Rezepte haben widersprüchliche Teilnährwerte; betroffene Wertepaarungen werden bis zur belegten Korrektur als unbekannt behandelt. Die Originaldaten werden nicht durch erfundene Angaben ersetzt. Der Rezepteditor und die Zutatenberechnung prüfen solche Widersprüche. Bei Beilagen bleiben nicht dokumentierte Teilnährwerte unbekannt statt als null Gramm zu gelten. [Datenbank-Prüfbericht](https://github.com/marcelkometz-web/abnehmen/blob/main/docs/datenbankpruefung-2026-10-31.md).

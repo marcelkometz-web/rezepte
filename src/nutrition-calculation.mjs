@@ -1,9 +1,11 @@
+import {nutritionIssues} from './domain.mjs';
 export const NUTRIENTS=['kcal','prot','kh','sugar','fat','sat_fat','fiber','salt'];
 export function calculateIngredients(ingredients,portions=1) {
   if(!Array.isArray(ingredients)||!ingredients.length||!Number.isFinite(portions)||portions<=0)throw Error('Zutaten und Portionen fehlen.');
   const totals=Object.fromEntries(NUTRIENTS.map(key=>[key,0]));
   for(const item of ingredients){
     if(!item||!Number.isFinite(item.grams)||item.grams<=0||item.grams>10000)throw Error('Bitte alle Zutatenmengen in Gramm prüfen.');
+    if(nutritionIssues(item.per100||{}).length)throw Error('Die Nährwerte pro 100 g widersprechen sich. Zucker darf die Kohlenhydrate und gesättigtes Fett das Gesamtfett nicht überschreiten.');
     for(const key of NUTRIENTS){
       const value=item.per100?.[key];
       if(value===null||value===undefined){totals[key]=null;continue;}
