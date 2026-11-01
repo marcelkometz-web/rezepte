@@ -378,3 +378,11 @@ DÖRRAUTOMAT
 EINTÖPFE UND MENÜBEGLEITER
 🍲 Der Filter Eintöpfe enthält passende vorhandene Gerichte und neue Eintöpfe. Insgesamt wurden 220 Rezepte ergänzt: Frühstück, Mittag, Abend, Salate, Desserts und 20 zusätzliche Eintöpfe. Die Zutatenberechnung nennt ihre Referenzen. Natürlicher Zucker zählt mit; unbekannte Ballaststoffe bleiben unbekannt.
 🍓 Im Rezept öffnet Dazu passt einen schmalen Bereich mit Vorspeisen und Desserts aus eurer eigenen Sammlung. Ein Wechsel schützt ungespeicherte eigene Tipps.
+
+
+GEMEINSAME KI-ZUGÄNGE, HILFE UND DEINE KANÄLE
+Unter Zuhause → KI-Zugänge verwalten entsperrt ihr die Einrichtung mit dem aktuellen App-Passwort. Die Familienverwaltung hinterlegt OpenAI und Gemini einmalig, jede Person wählt ihren Anbieter für alle drei Apps. Die Schlüssel sind verschlüsselt und nicht Teil von Sicherungen. Die API wird getrennt vom ChatGPT-Abo abgerechnet.
+READ/Bedienhilfe leuchtet in Mint, Impressum in Pink. Die bestätigten Profil-Schaltflächen öffnen ein neues Fenster ohne Seitenverweis oder App-Daten:
+Instagram: https://www.instagram.com/diegartenmutti86/
+TikTok: https://www.tiktok.com/@gartenmutti86
+YouTube: https://youtube.com/@diemutti86

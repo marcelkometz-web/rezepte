@@ -9,6 +9,9 @@
 
 .sidebar-bottom>.text-button{display:block}.sidebar-bottom>p{overflow-wrap:anywhere}
 
+/* Textmeldungen dürfen die darunterliegenden Links auf kleinen Displays nicht sperren. */
+.notifications>.toast{pointer-events:none}
+
 /* Kochansicht: Mengen und lokale Tauschideen bleiben vom Original getrennt. */
 .portion-control>label{margin-right:auto;font-size:.82rem;color:var(--muted)}.portion-control input{width:76px;min-width:0;padding:9px 5px;text-align:center;font-size:16px;background:var(--input);color:var(--ink);border:1px solid var(--line);border-radius:9px}.meal-tools{background:var(--paper-raised)}.meal-tools-section{min-width:0;border-bottom:1px solid var(--line);padding-bottom:15px}.meal-tools-section:last-of-type{border:0}.meal-tools p,.meal-tools li{overflow-wrap:anywhere}.meal-swap-option{margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}.meal-swap-option>strong{font-size:.85rem}.meal-batch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.meal-batch-grid label{display:grid;gap:7px;font-size:.8rem}.meal-batch-grid input{width:100%;min-width:0;padding:10px;font-size:16px;color:var(--ink);background:var(--input);border:1px solid var(--line);border-radius:9px}.meal-quantity-unknown{display:block;font-size:.67rem;color:var(--muted);margin-top:4px}.meal-tools>button{margin-top:15px}.meal-tools a{overflow-wrap:anywhere;font-size:.8rem}@media(max-width:400px){.portion-control{gap:6px}.portion-control input{width:62px}.meal-batch-grid{grid-template-columns:1fr}}
 
