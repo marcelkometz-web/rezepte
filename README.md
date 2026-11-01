@@ -51,3 +51,7 @@ Garten, Rezepte und Abnehmen teilen ihre Supabase-Anmeldung im lokalen Browser-S
 ## Datenqualität und Hilfe
 
 Das gemeinsame Impressum verwendet den bestätigten Betreiberkontakt. Die allgemeine Hilfe und alle drei Bedienhilfen öffnen im gemeinsamen App-Fenster. Neun ältere Rezepte haben widersprüchliche Teilnährwerte; betroffene Wertepaarungen werden bis zur belegten Korrektur als unbekannt behandelt. Die Originaldaten werden nicht durch erfundene Angaben ersetzt. Der Rezepteditor und die Zutatenberechnung prüfen solche Widersprüche. Bei Beilagen bleiben nicht dokumentierte Teilnährwerte unbekannt statt als null Gramm zu gelten. [Datenbank-Prüfbericht](https://github.com/marcelkometz-web/abnehmen/blob/main/docs/datenbankpruefung-2026-10-31.md).
+
+## Schwebende Navigation
+
+Start, Zurück, Vorwärts und ein auswählbarer Verlauf sind in der gemeinsamen Oberfläche und allen drei Einzel-Apps verfügbar. Die gemeinsame Oberfläche verbindet die bekannten Menüseiten über validierte Frame-Nachrichten; die Einzel-Apps steuern ihre eigenen erlaubten Seiten. Ein neuer Weg nach einem Rücksprung entfernt den bisherigen Vorwärtszweig. Der begrenzte Verlauf bleibt ausschließlich im Arbeitsspeicher und enthält nur feste App-/Seitenkennungen; Authverlust löscht ihn. Offene Dialoge, laufende Speicherungen und ungespeicherte Formulare werden berücksichtigt. Die Leiste erhält reservierten Platz statt Inhalte zu überdecken.

@@ -43,17 +43,26 @@ export function createRecipeController(ctx){
    if(linkedRecipe){const id=linkedRecipe;linkedRecipe=null;const url=new URL(location.href);url.searchParams.delete('recipe');history.replaceState(null,'',url);queueMicrotask(()=>{if(epoch===state.epoch&&state.recipes.some(r=>String(r.id)===id))detail(id);});}
   }catch(e){if(epoch!==state.epoch)return;state.error=e.message;if(e.status===401||e.status===403){state.recipes=[];state.notes=[];state.loaded=false;}if(!quiet)notify(e.message,true);rerender();}finally{state.loading=false;loadPromise=null;}})();return loadPromise;
  }
- function reset(){state.epoch++;state.recipes=[];state.notes=[];state.rights=[];state.chat=[];state.loaded=false;state.loading=false;state.userId=null;state.error='';loadPromise=null;
+ function reset(){globalThis.appNavigation?.reset?.();state.epoch++;state.recipes=[];state.notes=[];state.rights=[];state.chat=[];state.loaded=false;state.loading=false;state.userId=null;state.error='';loadPromise=null;
   for(const url of state.images.values())URL.revokeObjectURL(url);state.images.clear();if(state.channel){client().removeChannel(state.channel);state.channel=null;}clearInterval(timer);timer=null;clearInterval(quoteTimer);quoteTimer=null;eggDialog?.close();stopReading();releaseWake();
  }
  function setup(){if(state.userId&&state.userId!==p().user.id)reset();if(!state.loaded&&!state.loading)queueMicrotask(()=>load());if(!timer){timer=setInterval(()=>{if(!(document.hidden||window.unserZuhauseHidden===true)&&!document.querySelector('dialog[open]')&&!document.querySelector('form[data-dirty]'))load({quiet:true});},30000);quoteTimer=setInterval(updateSaying,30000);}
   if(!state.channel){state.channel=client().channel('recipe-sync:'+p().user.id).on('postgres_changes',{event:'*',schema:'public',table:'recipe_sync_events',filter:'family_id=eq.'+p().data.membership.family_id},()=>{clearTimeout(liveTimer);liveTimer=setTimeout(()=>{if(document.hidden||window.unserZuhauseHidden===true)return;if(!dialog.open&&!document.querySelector('form[data-dirty]'))load({quiet:true});else notify('Es gibt Änderungen. Sie werden nach dem Schließen und Speichern abgeglichen.');},500);}).subscribe();}
  }
  const go=(view,filter=null)=>{if(filter){state.filter=filter;state.limit=24;}p().view=view;rerender();window.scrollTo(0,0);};
+ const navigationPages=new Set(['overview','daily','plants','beds','notes','settings']);let navigationMoving=false;
+ const navigationReady=()=>Boolean(ctx.navigationAllowed?ctx.navigationAllowed():p().user&&p().data?.membership&&!p().data?.capabilities?.blocked&&!p().loading);
+ function reportNavigation(){globalThis.appNavigation?.report?.({page:navigationPages.has(p().view)?p().view:'overview',ready:navigationReady()&&navigationPages.has(p().view),busy:navigationMoving||Boolean(ctx.navigationBusy?.())||Boolean(document.querySelector('form[data-busy]'))});}
+ globalThis.appNavigation?.register?.({app:'rezepte',navigate:async route=>{
+  if(route?.app!=='rezepte'||!navigationPages.has(route?.page)||!navigationReady())return false;
+  if(navigationMoving||ctx.navigationBusy?.()||dialog.open||eggDialog?.open||document.querySelector('form[data-busy],form[data-dirty],[data-drawing="true"]')){notify('Bitte schließe offene Fenster und speichere deine Eingaben, bevor du die Seite wechselst.');return false;}
+  navigationMoving=true;reportNavigation();try{go(route.page);return true;}finally{navigationMoving=false;reportNavigation();}
+ }});
+
  function toggleFavorite(id){id=String(id);favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];store.set('favorites',favorites);if(p().view==='plants')results();else document.querySelectorAll(`[data-favorite="${id}"]`).forEach(b=>{b.textContent=favorites.includes(id)?'♥':'♡';b.classList.toggle('selected',favorites.includes(id));b.setAttribute('aria-pressed',String(favorites.includes(id)));});}
  function updateSaying(){if(document.hidden||window.unserZuhauseHidden===true)return;for(const el of document.querySelectorAll('[data-recipe-saying]'))el.textContent=saying();const day=new Date().toLocaleDateString('en-CA');if(day!==dailyDay){dailyDay=day;if(p().view==='daily'&&state.loaded)rerender();}}
  function footer(){return h('div',{class:'actions'},B('Bedienhilfe',()=>readHelp(),'text-button'),B('Impressum',legal,'text-button'),h('a',{href:'/garten/',class:'text-button'},'♧ Zur Garten-App'));}
- function render(){setup();const view=p().view;
+ function render(){setup();queueMicrotask(reportNavigation);const view=p().view;
   const nav=[['overview','♧','Rezepte'],['daily','☀','Heute'],['plants','♡','Favoriten'],['beds','☷','Einkauf'],['notes','☏','Forum'],['settings','⚙','Konto']];
   const sidebar=h('aside',{class:'sidebar'},h('a',{href:'/rezepte/',class:'brand'},h('span',{class:'brand-symbol'},'♧'),'Rezepte'),h('nav',{class:'main-nav','aria-label':'Hauptnavigation'},nav.map(([id,icon,label])=>B([h('span',{class:'nav-symbol','aria-hidden':'true'},icon),h('span',{},label)],()=>go(id),`nav-button ${view===id?'active':''}`,{'aria-current':view===id?'page':null}))),h('div',{class:'sidebar-bottom'},h('p',{class:'small muted'},p().data.profile?.display_name||p().user.email),h('a',{href:'/garten/',class:'text-button'},'♧ Zur Garten-App'),B('Abmelden ↗',logout,'text-button')));
   const titles={overview:['GEMEINSAM AM TISCH','Eure Rezepte.'],daily:['FRISCHE IDEEN FÜR HEUTE','Was kochen wir heute?'],plants:['IMMER WIEDER GUT','Lieblingsgerichte.'],beds:['GUT GEPLANT','Eure Einkaufsliste.'],notes:['GARTEN & KÜCHE','Unser Familienforum.'],settings:['FÜR EURE FAMILIE','Konto & Verwaltung.']};const [eyebrow,title]=titles[view]||titles.overview;

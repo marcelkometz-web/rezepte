@@ -6802,20 +6802,20 @@ Eure Ideen wachsen weiter.`, description: "Ein guter Platz f\xFCr Gartenpl\xE4ne
     }
     async function W(t, e) {
       if (!e?.disabled) {
-        e && (e.disabled = true, e.setAttribute("aria-busy", "true")), br++;
+        e && (e.disabled = true, e.setAttribute("aria-busy", "true")), br++;queueMicrotask(recipeNavigationStatus);
         try {
           return await t();
         } catch (n) {
           J(Ue(n), true);
         } finally {
-          br--, e && (e.disabled = false, e.removeAttribute("aria-busy"));
+          br--,queueMicrotask(recipeNavigationStatus), e && (e.disabled = false, e.removeAttribute("aria-busy"));
         }
       }
     }
     async function te(t, e) {
       let n = [...t.querySelectorAll("input, button, select, textarea")], r = new Set(n.filter((a) => a.disabled));
       if (t.dataset.busy) return;
-      t.dataset.busy = "true", br++;
+      t.dataset.busy = "true", br++;queueMicrotask(recipeNavigationStatus);
       let i = t.querySelector("[data-error]");
       i && (i.textContent = ""), n.forEach((a) => a.disabled = true), t.setAttribute("aria-busy", "true");
       try {
@@ -6825,7 +6825,7 @@ Eure Ideen wachsen weiter.`, description: "Ein guter Platz f\xFCr Gartenpl\xE4ne
       } catch (a) {
         i ? i.textContent = Ue(a) : J(Ue(a), true);
       } finally {
-        br--, n.forEach((a) => a.disabled = r.has(a)), t.removeAttribute("aria-busy"), delete t.dataset.busy;
+        br--,queueMicrotask(recipeNavigationStatus), n.forEach((a) => a.disabled = r.has(a)), t.removeAttribute("aria-busy"), delete t.dataset.busy;
       }
     }
     function pd() {
@@ -7250,6 +7250,7 @@ ${n}`), u.currentTarget), "button secondary"), S("Drucken / als PDF", () => Ed(t
       ot.clear(), j.open && j.close(), j.replaceChildren();
     }
     function Ai() {
+      globalThis.appNavigation?.reset?.();
       RX.reset();
       kl(), We = null, bt = false, et++, kn = null, p = { ...p, access: p.access ? { ...p.access, maintenance_access: false } : null, user: null, data: null, error: "", query: "", loading: false, lastSync: null };
     }
@@ -7282,7 +7283,10 @@ ${n}`), u.currentTarget), "button secondary"), S("Drucken / als PDF", () => Ed(t
     function el() {
       return p.access?.maintenance && p.access?.maintenance_access ? o("aside", { class: "maintenance-banner", role: "status" }, o("strong", {}, "\u{1F6E0}\uFE0F Wartungsmodus aktiv \xB7 Zugang nur f\xFCr den Superadmin"), S("Wartung verwalten", () => Ma(true, "maintenance"), "text-button")) : null;
     }
+    function recipeNavigationAllowed(){return!!p.user&&!Ge&&!bt&&!p.loading&&!!p.data?.membership&&!p.data?.capabilities?.blocked&&!Zt(p.access||p.data?.capabilities);}
+    function recipeNavigationStatus(){globalThis.appNavigation?.report?.({page:["overview","daily","plants","beds","notes","settings"].includes(p.view)?p.view:"overview",ready:recipeNavigationAllowed()&&["overview","daily","plants","beds","notes","settings"].includes(p.view),busy:br>0||!!document.querySelector("form[data-busy]")});}
     function ue(){
+      queueMicrotask(recipeNavigationStatus);
       hd();
       if(p.loading&&!p.data)return xe.replaceChildren(o('div',{class:'initial-loader'},o('span',{class:'brand-symbol'},'♧'),o('p',{},'Eure Rezepte werden geladen …')));
       if(!Ge&&Zt(p.access||p.data?.capabilities))return xe.replaceChildren(Id());
@@ -8397,7 +8401,7 @@ ${n}`), u.currentTarget), "button secondary"), S("Drucken / als PDF", () => Ed(t
         p.loading = false, xe.replaceChildren(o("main", { class: "setup-page" }, lt("Noch ein kleiner Einrichtungsschritt.", Ue(t), S("Erneut laden", () => location.reload())), Ct()));
       }
     }
-    const RX=createRecipeController({h:o,button:S,field:G,small:E,empty:lt,formError:re,formAction:te,perform:W,notify:J,showDialog:se,dialog:j,lockScroll:pd,unlockScroll:pl,getClient:$,getState:()=>p,refresh:()=>he({quiet:true}),rerender:ue,logout:pr,theme:()=>je.id,seasonDialog:wd,install:Ua,currentAI:()=>({provider:At(),model:Tn(At())}),aiChoice:()=>Zd(),aiKeys:()=>Yd(true),adminEntry:rh,forumView:()=>Fa.view(),profile:()=>{const v=th();se('Dein Profil',v.node,{className:'settings-dialog',cleanup:v.cleanup});}});
+    const RX=createRecipeController({navigationAllowed:recipeNavigationAllowed,navigationBusy:()=>br>0||p.loading||Ge||bt,h:o,button:S,field:G,small:E,empty:lt,formError:re,formAction:te,perform:W,notify:J,showDialog:se,dialog:j,lockScroll:pd,unlockScroll:pl,getClient:$,getState:()=>p,refresh:()=>he({quiet:true}),rerender:ue,logout:pr,theme:()=>je.id,seasonDialog:wd,install:Ua,currentAI:()=>({provider:At(),model:Tn(At())}),aiChoice:()=>Zd(),aiKeys:()=>Yd(true),adminEntry:rh,forumView:()=>Fa.view(),profile:()=>{const v=th();se('Dein Profil',v.node,{className:'settings-dialog',cleanup:v.cleanup});}});
     oh();
   })();
 })();
