@@ -1,6 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.118.0';
 import garden from './garden-config.json' with { type: 'json' };
 import { selectDailyRecipes } from './daily-selection.mjs';
+import {confirmedHarvests,harvestBasis,harvestStart}from './harvest-selection.mjs';
 
 // Dedicated read-only endpoint. No recipe mutations, uploads or admin actions.
 const family='936a916b-e153-45fb-8528-76e20d1d508d';
@@ -32,7 +33,13 @@ Deno.serve(async request=>{
     const date=typeof body.date==='string'?body.date:new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Berlin'});
     if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||!Number.isFinite(Date.parse(date))||new Date(date+'T12:00:00Z').toISOString().slice(0,10)!==date)return reply(400,{error:'Ungültiges Datum.'});
     const rows=[];
-    for(let i=0;i<10000;i+=500){const result=await db.from('Rezepte').select('id,title,emoji,kcal,prot,category').order('id').range(i,i+499);if(result.error)throw Error('database');rows.push(...result.data);if(result.data.length<500)break;}
-    return reply(200,{date,recipes:selectDailyRecipes(rows,date)});
+    for(let i=0;i<10000;i+=500){const result=await db.from('Rezepte').select('id,title,emoji,kcal,prot,category,ingredients,zutaten_liste').order('id').range(i,i+499);if(result.error)throw Error('database');rows.push(...result.data);if(result.data.length<500)break;}
+    // Caller context preserves garden RLS. Never use the recipes service role
+    // to read garden notes, photos, plant catalogues or private diary values.
+    let harvests:unknown[]=[],available=true;
+    try{const result=await caller.from('rg_harvests').select('title,harvested_on').eq('family_id',family).gte('harvested_on',harvestStart(date)).lte('harvested_on',date).order('harvested_on',{ascending:false}).limit(500);if(result.error)available=false;else harvests=result.data||[];}catch{available=false;}
+    const current=await caller.rpc('recipe_session_valid');if(current.error||current.data!==true)return reply(401,{error:'Die Sitzung ist nicht mehr gültig.'});
+    const confirmed=confirmedHarvests(harvests,date),recipes=selectDailyRecipes(rows,date,{harvests});
+    return reply(200,{date,recipes,basis:harvestBasis(confirmed,date,available,recipes.some(recipe=>recipe.harvestMatches.length>0))});
   }catch{return reply(503,{error:'Die Rezeptideen sind gerade nicht erreichbar.'});}
 });

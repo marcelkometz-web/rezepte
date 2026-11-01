@@ -28,6 +28,11 @@ export function isSalad(recipe) {
   const cats=categories(recipe.category);
   return cats.some(c=>['salat','salate','salad','salads'].includes(c)) || /(?:^|[\s-])[a-z]*salat(?:[\s-]|$)/.test(fold(recipe.title));
 }
+export function isStew(recipe) {
+  const cats=categories(recipe.category),title=fold(recipe.title);
+  if(cats.some(c=>['eintoepfe','eintopf','stew','stews'].includes(c)))return true;
+  return !/gewuerz|pulver/.test(title)&&/(?:^|[\s-])[a-z]*eint(?:opf|oepfe)(?:\s|$)/.test(title);
+}
 export function meals(recipe) {
   const cats=categories(recipe.category), explicit=Object.keys(MEALS).filter(c=>cats.includes(c));
   if(cats.some(c=>['nachtisch','suessspeise','desserts'].includes(c))&&!explicit.includes('dessert'))explicit.push('dessert');
@@ -46,6 +51,7 @@ export function matches(recipe,query='',filter='all',favorites=[]) {
   if(filter==='highprotein'&&(!Number.isFinite(Number(recipe.prot))||Number(recipe.prot)<25)) return false;
   if(filter==='lowcarb'&&!cats.includes('lowcarb')) return false;
   if(filter==='salate'&&!isSalad(recipe)) return false;
+  if(filter==='eintoepfe'&&!isStew(recipe)) return false;
   if(filter==='kalorienbewusst'&&!cats.includes('kalorienbewusst')) return false;
   if(filter==='nutrition-check'&&!nutritionIssues(recipe).length) return false;
   if(filter in MEALS&&!meals(recipe).includes(filter)) return false;

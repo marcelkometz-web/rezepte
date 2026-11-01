@@ -1,5 +1,6 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.118.0';
 import garden from './garden-config.json' with { type: 'json' };
+import {RESTORE_BODY_LIMIT,normalizeRestore,imageUpload,cleanupInput} from './backup-restore.mjs';
 const FAMILY='936a916b-e153-45fb-8528-76e20d1d508d';
 let key=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')||'';
 try{key=JSON.parse(Deno.env.get('SUPABASE_SECRET_KEYS')||'{}').default||key;}catch{}
@@ -23,12 +24,12 @@ function validate(value:any){
  return out;
 }
 async function limited(req:Request){
- if(Number(req.headers.get('content-length'))>2_000_000)throw Error('input');
+ if(Number(req.headers.get('content-length'))>RESTORE_BODY_LIMIT)throw Error('input');
  const reader=req.body?.getReader();if(!reader)throw Error('input');const chunks:Uint8Array[]=[];let size=0;
- try{while(true){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>2_000_000){await reader.cancel();throw Error('input');}chunks.push(value);}}finally{reader.releaseLock();}
- const b=new Uint8Array(size);let p=0;for(const c of chunks){b.set(c,p);p+=c.length;}return JSON.parse(new TextDecoder().decode(b));
+ try{while(true){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>RESTORE_BODY_LIMIT){await reader.cancel();throw Error('input');}chunks.push(value);}}finally{reader.releaseLock();}
+ const b=new Uint8Array(size);let p=0;for(const c of chunks){b.set(c,p);p+=c.length;}let parsed;try{parsed=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(b));}catch{throw Error('input');}if(size>2_000_000&&!['backup-restore','import'].includes(parsed?.action))throw Error('input');return parsed;
 }
-async function all(table:string){let out:any[]=[];for(let i=0;i<10000;i+=500){let q=db.from(table).select('*').order('id').range(i,i+499);if(table==='Notizen')q=q.not('author','ilike','SYSTEM%');const r=await q;if(r.error)throw Error('database');out.push(...r.data);if(r.data.length<500)return out;}throw Error('limit');}
+async function all(table:string){let out:any[]=[];for(let i=0;i<10000;i+=500){let q=db.from(table).select('*').order('id').range(i,i+499);if(table==='Notizen')q=q.not('author','ilike','SYSTEM%');const r=await q;if(r.error)throw Error('database');out.push(...(table==='Notizen'?r.data.filter((row:any)=>!/^SYSTEM/i.test(String(row.author||'').trim())):r.data));if(r.data.length<500)return out;}throw Error('limit');}
 Deno.serve(async req=>{
  const origin=req.headers.get('origin')||'';
  const headers={...base,...(origin==='https://marcelkometz-web.github.io'?{'Access-Control-Allow-Origin':origin}:{})};
@@ -50,7 +51,18 @@ Deno.serve(async req=>{
  const {data:rights,error:rightsError}=await db.rpc('recipe_rights');if(rightsError)throw Error('database');
  const admin=member.role==='owner',canEdit=admin||(rights||[]).some((r:any)=>r.user_id===user.id&&r.can_edit);
  const success=async(body:unknown)=>{await client.from('recipe_sync_events').upsert({family_id:FAMILY,changed_at:new Date().toISOString()});return reply(200,body);};
- if(input.action==='boot'){const v=await db.rpc('recipe_variations');if(v.error)throw Error('database');const recipes=(await all('Rezepte')).map(r=>{const name=Object.keys(v.data||{}).find(k=>String(r.title||'').toLowerCase().includes(k));return name?{...r,_variations:v.data[name]}:r;});return reply(200,{recipes,notes:await all('Notizen'),canEdit,admin,rights:admin?rights:[]});}
+ const backupRequested=input.action.startsWith('backup-')||(input.action==='boot'&&input.backup===true);
+ if(backupRequested){
+  if(input.expectedActor!==undefined&&input.expectedActor!==user.id||input.expectedFamily!==undefined&&input.expectedFamily!==FAMILY)throw Error('input');
+  const access=await client.rpc('ab_current_diary');if(access.error||typeof access.data!=='string'||!/^[-0-9a-f]{36}$/i.test(access.data))return reply(403,{error:'Die gemeinsame Sicherung ist nur für eure beiden aktuell freigeschalteten Tagebuchkonten verfügbar.'});
+  if(input.action!=='boot'&&(!admin||!canEdit))return reply(403,{error:'Nur die Familienverwaltung darf eine gemeinsame Sicherung wiederherstellen oder deren Bilder vorbereiten.'});
+ }
+ if(input.action==='boot'){
+ const before=input.backup===true?await db.rpc('recipe_backup_snapshot'):null;if(before?.error)throw Error('database');
+ const v=await db.rpc('recipe_variations');if(v.error)throw Error('database');const recipes=(await all('Rezepte')).map(r=>{const name=Object.keys(v.data||{}).find(k=>String(r.title||'').toLowerCase().includes(k));return name?{...r,_variations:v.data[name]}:r;});const notes=await all('Notizen');
+ if(input.backup===true){const after=await db.rpc('recipe_backup_snapshot');if(after.error)throw Error('database');if(typeof before?.data!=='string'||!/^[a-f0-9]{32}$/.test(before.data)||before.data!==after.data)return reply(409,{error:'Die Rezeptsammlung wurde während der Sicherung geändert. Bitte erneut laden.'});return reply(200,{recipes,notes,canEdit,admin,rights:admin?rights:[],backupSnapshot:before.data,sourceActor:user.id,sourceFamily:FAMILY});}
+ return reply(200,{recipes,notes,canEdit,admin,rights:admin?rights:[]});
+ }
  if(input.action==='image'){
  if(!imagePath(input.path))throw Error('input');
  const r=await db.storage.from('RezeptBilder').download(input.path);if(r.error)throw Error('database');
@@ -88,6 +100,23 @@ Deno.serve(async req=>{
  if(typeof input.image!=='string'||input.image.length>360000||!/^[A-Za-z0-9+/]*={0,2}$/.test(input.image))throw Error('input');
  const bytes=Uint8Array.from(atob(input.image),c=>c.charCodeAt(0));if(bytes.length>262144||bytes[0]!==255||bytes[1]!==216)throw Error('input');
  const path=`recipes/${crypto.randomUUID()}.jpg`;const r=await db.storage.from('RezeptBilder').upload(path,bytes,{contentType:'image/jpeg',upsert:false});if(r.error)throw Error('database');return reply(200,{path});
+ }
+ if(input.action==='backup-image-upload'){
+ const image=imageUpload(input,{actor:user.id,family:FAMILY}),digest=await crypto.subtle.digest('SHA-256',image.bytes),sha=[...new Uint8Array(digest)].map(value=>value.toString(16).padStart(2,'0')).join(''),path=`recipes/${crypto.randomUUID()}.${image.extension}`;
+ const registered=await db.rpc('recipe_backup_upload_register',{p_actor:user.id,p_family:FAMILY,p_operation:image.operationId,p_path:path,p_mime:image.mime,p_sha256:sha});if(registered.error)throw Error('database');
+ const uploaded=await db.storage.from('RezeptBilder').upload(path,image.bytes,{contentType:image.mime,cacheControl:'0',upsert:false});if(uploaded.error)throw Error('database');return reply(200,{path,mime:image.mime,bytes:image.bytes.length});
+ }
+ if(input.action==='backup-image-cleanup'){
+ const value=cleanupInput(input,{actor:user.id,family:FAMILY}),claimed=await db.rpc('recipe_backup_upload_claim_cleanup',{p_actor:user.id,p_family:FAMILY,p_operation:value.operationId,p_paths:value.paths});if(claimed.error||!Array.isArray(claimed.data))throw Error('database');
+ const paths=claimed.data.map((row:any)=>row.path);if(paths.length>100||paths.some((path:any)=>typeof path!=='string'||!/^recipes\/[0-9a-f-]{36}\.(jpg|png|webp)$/i.test(path)||value.paths!==null&&!value.paths.includes(path)))throw Error('database');
+ if(paths.length){const removed=await db.storage.from('RezeptBilder').remove(paths);if(removed.error)throw Error('database');const finished=await db.rpc('recipe_backup_upload_finish_cleanup',{p_actor:user.id,p_family:FAMILY,p_operation:value.operationId,p_paths:paths});if(finished.error)throw Error('database');}
+ return reply(200,{ok:true,removedPaths:paths,keptPaths:(value.paths||[]).filter((path:string)=>!paths.includes(path)),more:value.paths===null&&paths.length===100});
+ }
+ if(input.action==='backup-restore'){
+ const value=normalizeRestore(input,{actor:user.id,family:FAMILY,validateRecipe:validate});
+ const restored=await db.rpc('recipe_restore_additive',{p_actor:user.id,p_family:FAMILY,p_source_actor:value.sourceActor,p_source_family:value.sourceFamily,p_operation:value.operationId,p_expected_snapshot:value.expectedSnapshot,p_recipes:value.recipes,p_notes:value.notes});
+ if(restored.error)return reply(restored.error.code==='40001'?409:400,{error:restored.error.code==='40001'?'Der Datenstand oder die bestätigte Wiederherstellung hat sich geändert. Bitte Vorschau neu laden.':'Die Sicherung konnte nicht vollständig übernommen werden. Vorhandene Rezepte und Notizen wurden nicht überschrieben.'});
+ if(!restored.data||restored.data.ok!==true||typeof restored.data.recipeMap!=='object')throw Error('database');return await success(restored.data);
  }
  if(input.action==='import'){
  if(!admin)return reply(403,{error:'Nur die Verwaltung kann eine Sicherung wiederherstellen.'});

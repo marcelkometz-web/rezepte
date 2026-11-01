@@ -1,4 +1,4 @@
-const CACHE='rezepte-shell-v6-floating-navigation';
+const CACHE='rezepte-shell-v7-week-plan-backups-stews';
 const BASE=new URL('./',self.location.href);
 const ASSETS=['./','./index.html','./app.js','./style.css','./recipe.css','./icon.svg','./IMG_0526.png','./manifest.webmanifest','./config.json','./Read.txt','./read.html','./ei.html','./impressum.html'].map(p=>new URL(p,BASE).href);
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS))));
