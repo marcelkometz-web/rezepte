@@ -1,6 +1,6 @@
-const CACHE='rezepte-shell-v11-berry-icons';
+const CACHE='rezepte-shell-v12-audit-fixes';
 const BASE=new URL('./',self.location.href);
-const ASSETS=['./','./index.html','./app.js','./style.css','./recipe.css','./icon.svg','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon-32.png','./IMG_0526.png','./manifest.webmanifest','./config.json','./Read.txt','./read.html','./ei.html','./impressum.html'].map(p=>new URL(p,BASE).href);
+const ASSETS=['./','./index.html','./app.js','./style.css','./recipe.css','./icon.svg','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon-32.png','./IMG_0526.png','./manifest.webmanifest','./config.json','./Read.txt','./read.html','./ei.html','./src/egg-countdown.mjs','./impressum.html'].map(p=>new URL(p,BASE).href);
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('rezepte-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

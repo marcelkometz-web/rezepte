@@ -112,7 +112,7 @@ const FIELDS=['created_at','recipes','title','ingredients','prep','description',
 export function importRows(input) {
   const list=Array.isArray(input)?input:input?.recipes;
   if(!Array.isArray(list)||!list.length||list.length>1000) throw Error('Bitte ein Backup mit 1 bis 1.000 Rezepten auswählen.');
-  const seen=new Set();
+  const seen=new Set(),ids=new Set();
   return list.map(r=>{
     if(!r||typeof r!=='object'||typeof r.title!=='string') throw Error('Jedes Rezept benötigt einen gültigen Titel.');
     const title=r.title.trim();
@@ -120,11 +120,16 @@ export function importRows(input) {
     if(seen.has(fold(title))) throw Error('Doppelte Rezepttitel im Backup.'); seen.add(fold(title));
     const row=Object.fromEntries(FIELDS.filter(k=>r[k]!==undefined).map(k=>[k,r[k]]));
     row.title=title;
-    if(r.id!==undefined){ if(!Number.isSafeInteger(Number(r.id))||Number(r.id)<1) throw Error('Ungültige Rezept-ID.'); row.id=Number(r.id); }
+    if(r.id!==undefined){ if(!Number.isSafeInteger(Number(r.id))||Number(r.id)<1) throw Error('Ungültige Rezept-ID.'); row.id=Number(r.id);if(ids.has(row.id))throw Error('Doppelte Rezept-IDs im Backup.');ids.add(row.id); }
     row.category=JSON.stringify(categories(r.category));
     for(const [a,b] of Object.entries({zutatenListe:'zutaten_liste',stoveStep:'stove_step',ovenStep:'oven_step',airfryerStep:'airfryer_step',docCheck:'doc_check'})) if(row[b]===undefined&&r[a]!==undefined) row[b]=r[a];
     for(const k of ['kcal','prot','kh','sugar','fat']) if(row[k]===undefined&&r.baseNutri?.[k]!==undefined) row[k]=r.baseNutri[k];
-    for(const k of ['kcal','prot','kh','sugar','fat','sat_fat','fiber','salt']) if(row[k]!==undefined&&row[k]!==null&&(!Number.isFinite(Number(row[k]))||Number(row[k])<0)) throw Error('Ungültige Nährwerte im Backup.');
+    for(const k of ['kcal','prot','kh','sugar','fat','sat_fat','fiber','salt','calories']){
+      if(row[k]===undefined||row[k]===null)continue;
+      if(typeof row[k]==='string'&&!row[k].trim()){row[k]=null;continue;}
+      if(!['string','number'].includes(typeof row[k])||!Number.isFinite(Number(row[k]))||Number(row[k])<0||Number(row[k])>100000)throw Error('Ungültige Nährwerte im Backup.');
+      row[k]=Number(row[k]);
+    }
     for(const k of Object.keys(row)) if(typeof row[k]==='string'&&row[k].length>30000) throw Error('Ein Feld im Backup ist zu lang.');
     return row;
   });

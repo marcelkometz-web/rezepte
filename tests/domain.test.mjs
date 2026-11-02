@@ -81,6 +81,12 @@ test('backup title normalization rejects duplicates that differ only in surround
  assert.equal(importRows([{title:'  Gemüsepfanne  '}])[0].title,'Gemüsepfanne');
  assert.throws(()=>importRows([{title:'Test'},{title:' Test '}]),/Doppelte Rezepttitel/);
 });
+test('backup numeric strings become server-compatible numbers and blank nutrition remains unknown',()=>{
+ const [row]=importRows([{id:'2',title:'Altes Backup',kcal:'123.4',prot:'0',fiber:' ',salt:'',calories:'123'}]);
+ assert.equal(row.id,2);assert.equal(row.kcal,123.4);assert.equal(row.prot,0);assert.equal(row.fiber,null);assert.equal(row.salt,null);assert.equal(row.calories,123);
+ for(const kcal of [true,[],{},'Infinity',100001])assert.throws(()=>importRows([{title:'Test',kcal}]),/Ungültige Nährwerte/);
+ assert.throws(()=>importRows([{title:'A',id:1},{title:'B',id:'1'}]),/Doppelte Rezept-IDs/);
+});
 test('all four seasons have unique, meal-related sayings without repeats for six hours',()=>{
  const all=Object.values(SAYINGS).flat();assert.equal(new Set(all).size,all.length);
  for(const season of Object.keys(SAYINGS)){assert.equal(SAYINGS[season].length,24);const seen=Array.from({length:24},(_,i)=>seasonalSaying(season,i*900000));assert.equal(new Set(seen).size,24);assert.equal(seasonalSaying(season,0),seasonalSaying(season,24*900000));}
