@@ -1,4 +1,5 @@
 export const MEALS = { fruehstueck:'Frühstück', mittag:'Mittagessen', abend:'Abendessen', dessert:'Nachtisch', snacks:'Snacks' };
+export const SNACK_TYPES = { kuchen:'Kuchen', kekse:'Kekse', sonstiges:'Sonstiges' };
 export const SIDES = {
   keine:{ name:'Ohne Extra-Beilage', kcal:0, prot:0, kh:0, sugar:0, fat:0, sat_fat:0, fiber:0, salt:0, amount:'' },
   zoodles:{ name:'Zucchini-Nudeln · 150 g', kcal:22, prot:1.8, kh:3.1, sugar:2.2, fat:.4, amount:'150 g Zucchini-Nudeln' },
@@ -33,16 +34,42 @@ export function isStew(recipe) {
   if(cats.some(c=>['eintoepfe','eintopf','stew','stews'].includes(c)))return true;
   return !/gewuerz|pulver/.test(title)&&/(?:^|[\s-])[a-z]*eint(?:opf|oepfe)(?:\s|$)/.test(title);
 }
+const snackAliases = {
+  kuchen:['kuchen','cake','cakes','tarte','tartes','tartelettes','torte','torten','brownie','brownies'],
+  kekse:['keks','kekse','cookie','cookies','plaetzchen'],
+  sonstiges:['sonstiges']
+};
+export function snackType(recipe) {
+  const cats=categories(recipe.category);
+  // An assigned subtype takes precedence, including an editor's correction of
+  // a title that resembles a different kind of snack.
+  for(const type of Object.keys(SNACK_TYPES))if(cats.includes(type))return type;
+  for(const [type,aliases] of Object.entries(snackAliases))if(cats.some(tag=>aliases.includes(tag)))return type;
+  const words=fold(recipe.title).match(/[a-z]+/g)||[];
+  if(words.some(word=>/(?:kekse?|cookies?|plaetzchen)$/.test(word)))return 'kekse';
+  const savoryCake=/hack(?:fleisch|baellchen)?|fleisch|fisch|lachs|haehnchen|thunfisch/.test(words.join(' '));
+  if(!savoryCake&&words.some(word=>!/(?:pfannkuchen|pancakes?|flammkuchen|reibekuchen)$/.test(word)&&/(?:kuchen|cakes?|tartes?|tartelettes?|torten?|brownies?)$/.test(word)))return 'kuchen';
+  return cats.some(tag=>['snack','snacks'].includes(tag))?'sonstiges':null;
+}
+export const isSnack = recipe => snackType(recipe)!==null;
+export function setSnackType(value,type='') {
+  if(type&&!Object.hasOwn(SNACK_TYPES,type))throw Error('Unbekannte Snack-Unterkategorie.');
+  const tags=categories(value).filter(tag=>!['snack','snacks',...Object.values(snackAliases).flat()].includes(tag));
+  return [...new Set([...tags,...(type?['snacks',type]:[])])];
+}
 export function meals(recipe) {
-  const cats=categories(recipe.category), explicit=Object.keys(MEALS).filter(c=>cats.includes(c));
+  const cats=categories(recipe.category), explicit=Object.keys(MEALS).filter(c=>cats.includes(c)),type=snackType(recipe);
+  const withSnacks=list=>type!==null&&!list.includes('snacks')?[...list,'snacks']:list;
   if(cats.some(c=>['nachtisch','suessspeise','desserts'].includes(c))&&!explicit.includes('dessert'))explicit.push('dessert');
-  if(cats.includes('snacks')&&/dessert|nachtisch|kuchen|mousse|pudding|tiramisu|praline/.test(fold(recipe.title))&&!explicit.includes('dessert'))explicit.push('dessert');
-  if(explicit.length) return explicit;
+  if(cats.includes('snacks')&&(type==='kuchen'||/dessert|nachtisch|kuchen|mousse|pudding|tiramisu|praline/.test(fold(recipe.title)))&&!explicit.includes('dessert'))explicit.push('dessert');
+  if(explicit.length) return withSnacks(explicit);
+  if(type==='kuchen')return ['dessert','snacks'];
+  if(type!==null)return ['snacks'];
   const title=fold(recipe.title);
-  if(/dessert|nachtisch|kuchen|mousse|pudding|tiramisu/.test(title)) return ['dessert'];
-  if(/fruehstueck/.test(title)) return ['fruehstueck'];
-  if(/brot/.test(title)) return ['abend'];
-  return ['mittag'];
+  if(/dessert|nachtisch|kuchen|mousse|pudding|tiramisu/.test(title)) return withSnacks(['dessert']);
+  if(/fruehstueck/.test(title)) return withSnacks(['fruehstueck']);
+  if(/brot/.test(title)) return withSnacks(['abend']);
+  return withSnacks(['mittag']);
 }
 export function matches(recipe,query='',filter='all',favorites=[]) {
   const cats=categories(recipe.category);
@@ -54,6 +81,7 @@ export function matches(recipe,query='',filter='all',favorites=[]) {
   if(filter==='eintoepfe'&&!isStew(recipe)) return false;
   if(filter==='kalorienbewusst'&&!cats.includes('kalorienbewusst')) return false;
   if(filter==='nutrition-check'&&!nutritionIssues(recipe).length) return false;
+  if(Object.hasOwn(SNACK_TYPES,filter)&&snackType(recipe)!==filter) return false;
   if(filter in MEALS&&!meals(recipe).includes(filter)) return false;
   const haystack=fold([recipe.title,recipe.ingredients,recipe.zutaten_liste,recipe.prep,recipe.stove_step,recipe.oven_step,recipe.airfryer_step,recipe.description,recipe.tipps].join(' '));
   return fold(query).split(/[\s,]+/).filter(Boolean).every(term=>haystack.includes(term));
