@@ -4,7 +4,7 @@ const fractionValues={'½':.5,'¼':.25,'¾':.75,'⅓':1/3,'⅔':2/3,'⅛':.125,'
 const fractionChars=Object.keys(fractionValues).join('');
 const numericToken=`(?:\\d+\\s+(?:\\d+\\s*\\/\\s*\\d+|[${fractionChars}])|\\d+[${fractionChars}]|\\d+\\s*\\/\\s*\\d+|\\d+(?:[.,]\\d+)*|[${fractionChars}])`;
 const leadingQuantity=new RegExp(`^((?:ca\\.\\s*|etwa\\s*|Saft von\\s*)?)(${numericToken})(?:\\s*[–—-]\\s*(${numericToken}))?\\s*(.*)$`,'i');
-const units=/^(kg|mg|g|ml|cl|dl|l|EL|TL|Esslöffel|Teelöffel|Stück|Stk\.?|Zehen?|Dosen?|Becher|Päckchen|Packungen?|Prisen?|Bund|Scheiben?|Handvoll)\b\.?\s*/i;
+const units=/^(kg|mg|g|ml|cl|dl|l|EL|TL|Esslöffel|Teelöffel|Stück|Stk\.?|Tropfen|Zehen?|Dosen?|Becher|Päckchen|Packungen?|Prisen?|Bund|Scheiben?|Handvoll)\b\.?\s*/i;
 const countable=/^(?:Ei(?:er)?|Zitronen?|Limetten?|Zwiebeln?|Schalotten?|Paprika|Tomaten?|Gurken?|Zucchini|Auberginen?|Möhren?|Karotten?|Äpfel|Apfel|Birnen?|Bananen?|Knoblauchzehen?|Kartoffeln?)\b/i;
 const amount=value=>Number(value).toLocaleString('de-DE',{maximumFractionDigits:3});
 

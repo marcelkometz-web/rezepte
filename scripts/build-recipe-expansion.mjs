@@ -9,7 +9,7 @@ export const BATCH='recipe-expansion-20261101';
 export const COURSE_COUNTS=Object.freeze({fruehstueck:40,mittag:50,abend:40,salate:35,dessert:35,eintoepfe:20});
 export const DATA_URL=new URL('../data/recipe-expansion-20261101.json',import.meta.url);
 const sha=value=>createHash('sha256').update(value).digest('hex');
-const stripAdjectives='low[ -]*carb|high[ -]*protein|protein|cremig(?:e|er|es)?|leicht(?:e|er|es)?|knusprig(?:e|er|es)?|saftig(?:e|er|es)?|gesund(?:e|er|es)?|fitness|power';
+const stripAdjectives='low[ -]*carb|high[ -]*protein|protein|cremig(?:er|es|e)?|leicht(?:er|es|e)?|knusprig(?:er|es|e)?|saftig(?:er|es|e)?|gesund(?:er|es|e)?|fitness|power';
 export function titleKey(value){return String(value||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/\p{Diacritic}/gu,'').replace(new RegExp(stripAdjectives,'g'),'').replace(/[^a-z0-9]/g,'');}
 const animal=new Set([13,18,19,26,32,42,45,47,51,56,60,61,67,74,77,79,80,90,94,95,100,103,109,111]);
 const fish=new Set([18,32,45,77,90,95,109]),meat=new Set([26,74,79,80,94]);

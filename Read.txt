@@ -65,6 +65,15 @@ mit ihren Rezeptzahlen. Eine Unterkategorie durchsucht die ganze Sammlung.
 „Alle Snacks anzeigen“ und „Zur Snack-Auswahl“ führen zurück zur Übersicht;
 „Alle Kategorien“ verlässt den Snack-Bereich. Die aktuelle Suche bleibt dabei
 erhalten. Ältere Kuchen und Kekse werden auch über ihren Titel zugeordnet.
+Die Snack-Erweiterung vom November 2026 umfasst je 25 neue Kuchen, Keksrezepte
+und weitere Snacks. Sie verwendet keinen zugesetzten Haushaltszucker, Honig
+oder Sirup. Natürlicher Zucker aus Obst und Milch wird mitgerechnet.
+Erythrit liefert laut Etikett 0 kcal und 0 g Zucker, zählt dort aber zu den
+Kohlenhydraten beziehungsweise mehrwertigen Alkoholen.
+15 Keksrezepte enthalten wenige IRONMAXX Flavour Drops in kalter Creme,
+Glasur oder Füllung: erst nach vollständigem Abkühlen zugeben und nicht
+mitbacken. Die berechnete Tropfenmenge skaliert mit der Portionszahl.
+Die Nährwertansicht zeigt Zutatenquellen und erklärt gerundete Kleinstdosen.
 Zusätzlich gibt es einen eigenen Salate-Filter.
 Zusätzliche Filter: Low-Carb, High-Protein, Airfryer und Favoriten.
 Rezepte mit mehreren Mahlzeit-Kategorien können unter mehreren Filtern passen.

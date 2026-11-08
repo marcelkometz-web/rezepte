@@ -1,0 +1,192 @@
+{
+  "vanilla": {
+    "label": "IRONMAXX Flavour Drops Vanille",
+    "flavour": "Vanille",
+    "source": {
+      "kind": "manufacturer-label",
+      "name": "IRONMAXX Nutrition · Flavour Drops Vanille (50 ml)",
+      "url": "https://www.ironmaxx.de/products/flavour-drops-50ml-flasche-vanille",
+      "retrievedAt": "2026-11-08"
+    },
+    "ingredients": [
+      "Wasser",
+      "Aroma",
+      "Süßungsmittel (Sucralose)"
+    ],
+    "per100ml": {
+      "kj": 5,
+      "kcal": 1
+    },
+    "per5Drops": {
+      "kj": 0,
+      "kcal": 0
+    },
+    "nutrientDeclaration": "Enthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Kohlenhydraten, Zucker, Eiweiß und Salz; keine Einzelmengen veröffentlicht.",
+    "doseRecommendation": {
+      "drops": 5,
+      "foodOrDrinkMl": 200,
+      "note": "Für Lebensmittel; nicht unverdünnt verzehren."
+    },
+    "calculationPolicy": {
+      "basis": "Herstellerangabe: 0 kcal pro 5 Tropfen (gerundete Portionsangabe).",
+      "per100gNotAvailable": true,
+      "dropVolumeMlNotPublished": true,
+      "densityNotPublished": true,
+      "macroAmountsNotPublished": true,
+      "note": "Kalorien aus den grammgenau erfassten Hauptzutaten berechnen. Tropfen als gesonderten, nach Hersteller gerundeten Kleinstbeitrag ausweisen; keine Gramm-, Dichte- oder Tropfenvolumenwerte erfinden und keine exakte energiefreie Flüssigkeit pro 100 ml behaupten."
+    },
+    "preparationRestriction": "Nur in kalten oder vollständig abgekühlten Cremes, Füllungen, Glasuren oder Speisen verwenden; nicht mitbacken, anbraten oder frittieren."
+  },
+  "chocolate": {
+    "label": "IRONMAXX Flavour Drops Schokolade",
+    "flavour": "Schokolade",
+    "source": {
+      "kind": "manufacturer-label",
+      "name": "IRONMAXX Nutrition · Flavour Drops Schokolade (50 ml)",
+      "url": "https://www.ironmaxx.de/products/flavour-drops-50ml-flasche-schokolade",
+      "retrievedAt": "2026-11-08"
+    },
+    "ingredients": [
+      "Wasser",
+      "Aroma",
+      "Süßungsmittel (Sucralose)"
+    ],
+    "per100ml": {
+      "kj": 28,
+      "kcal": 7
+    },
+    "per5Drops": {
+      "kj": 0,
+      "kcal": 0
+    },
+    "nutrientDeclaration": "Enthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Kohlenhydraten, Zucker, Eiweiß und Salz; keine Einzelmengen veröffentlicht.",
+    "doseRecommendation": {
+      "drops": 5,
+      "foodOrDrinkMl": 200,
+      "note": "Für Lebensmittel; nicht unverdünnt verzehren."
+    },
+    "calculationPolicy": {
+      "basis": "Herstellerangabe: 0 kcal pro 5 Tropfen (gerundete Portionsangabe).",
+      "per100gNotAvailable": true,
+      "dropVolumeMlNotPublished": true,
+      "densityNotPublished": true,
+      "macroAmountsNotPublished": true,
+      "note": "Kalorien aus den grammgenau erfassten Hauptzutaten berechnen. Tropfen als gesonderten, nach Hersteller gerundeten Kleinstbeitrag ausweisen; keine Gramm-, Dichte- oder Tropfenvolumenwerte erfinden und keine exakte energiefreie Flüssigkeit pro 100 ml behaupten."
+    },
+    "preparationRestriction": "Nur in kalten oder vollständig abgekühlten Cremes, Füllungen, Glasuren oder Speisen verwenden; nicht mitbacken, anbraten oder frittieren."
+  },
+  "caramel": {
+    "label": "IRONMAXX Flavour Drops Karamell",
+    "flavour": "Karamell",
+    "source": {
+      "kind": "manufacturer-label",
+      "name": "IRONMAXX Nutrition · Flavour Drops Karamell (50 ml)",
+      "url": "https://www.ironmaxx.de/products/flavour-drops-50ml-karamell",
+      "retrievedAt": "2026-11-08"
+    },
+    "ingredients": [
+      "Wasser",
+      "Aroma",
+      "Süßungsmittel (Sucralose)"
+    ],
+    "per100ml": {
+      "kj": 6,
+      "kcal": 1
+    },
+    "per5Drops": {
+      "kj": 0,
+      "kcal": 0
+    },
+    "nutrientDeclaration": "Enthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Kohlenhydraten, Zucker, Eiweiß und Salz; keine Einzelmengen veröffentlicht.",
+    "doseRecommendation": {
+      "drops": 5,
+      "foodOrDrinkMl": 200,
+      "note": "Für Lebensmittel; nicht unverdünnt verzehren."
+    },
+    "calculationPolicy": {
+      "basis": "Herstellerangabe: 0 kcal pro 5 Tropfen (gerundete Portionsangabe).",
+      "per100gNotAvailable": true,
+      "dropVolumeMlNotPublished": true,
+      "densityNotPublished": true,
+      "macroAmountsNotPublished": true,
+      "note": "Kalorien aus den grammgenau erfassten Hauptzutaten berechnen. Tropfen als gesonderten, nach Hersteller gerundeten Kleinstbeitrag ausweisen; keine Gramm-, Dichte- oder Tropfenvolumenwerte erfinden und keine exakte energiefreie Flüssigkeit pro 100 ml behaupten."
+    },
+    "preparationRestriction": "Nur in kalten oder vollständig abgekühlten Cremes, Füllungen, Glasuren oder Speisen verwenden; nicht mitbacken, anbraten oder frittieren."
+  },
+  "coconut": {
+    "label": "IRONMAXX Flavour Drops Kokos",
+    "flavour": "Kokos",
+    "source": {
+      "kind": "manufacturer-label",
+      "name": "IRONMAXX Nutrition · Flavour Drops Kokos (50 ml)",
+      "url": "https://www.ironmaxx.de/products/flavour-drops-50ml-flasche-kokos",
+      "retrievedAt": "2026-11-08"
+    },
+    "ingredients": [
+      "Wasser",
+      "Aroma",
+      "Süßungsmittel (Sucralose)"
+    ],
+    "per100ml": {
+      "kj": 5,
+      "kcal": 1
+    },
+    "per5Drops": {
+      "kj": 0,
+      "kcal": 0
+    },
+    "nutrientDeclaration": "Enthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Kohlenhydraten, Zucker, Eiweiß und Salz; keine Einzelmengen veröffentlicht.",
+    "doseRecommendation": {
+      "drops": 5,
+      "foodOrDrinkMl": 200,
+      "note": "Für Lebensmittel; nicht unverdünnt verzehren."
+    },
+    "calculationPolicy": {
+      "basis": "Herstellerangabe: 0 kcal pro 5 Tropfen (gerundete Portionsangabe).",
+      "per100gNotAvailable": true,
+      "dropVolumeMlNotPublished": true,
+      "densityNotPublished": true,
+      "macroAmountsNotPublished": true,
+      "note": "Kalorien aus den grammgenau erfassten Hauptzutaten berechnen. Tropfen als gesonderten, nach Hersteller gerundeten Kleinstbeitrag ausweisen; keine Gramm-, Dichte- oder Tropfenvolumenwerte erfinden und keine exakte energiefreie Flüssigkeit pro 100 ml behaupten."
+    },
+    "preparationRestriction": "Nur in kalten oder vollständig abgekühlten Cremes, Füllungen, Glasuren oder Speisen verwenden; nicht mitbacken, anbraten oder frittieren."
+  },
+  "lemon_cheesecake": {
+    "label": "IRONMAXX Flavour Drops Lemon-Cheesecake",
+    "flavour": "Lemon-Cheesecake",
+    "source": {
+      "kind": "manufacturer-label",
+      "name": "IRONMAXX Nutrition · Flavour Drops Lemon-Cheesecake (50 ml)",
+      "url": "https://www.ironmaxx.de/products/flavour-drops-50ml-flasche-lemon-cheesecake",
+      "retrievedAt": "2026-11-08"
+    },
+    "ingredients": [
+      "Wasser",
+      "Aroma",
+      "Süßungsmittel (Sucralose)"
+    ],
+    "per100ml": {
+      "kj": 30,
+      "kcal": 7
+    },
+    "per5Drops": {
+      "kj": 0,
+      "kcal": 0
+    },
+    "nutrientDeclaration": "Enthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Kohlenhydraten, Zucker, Eiweiß und Salz; keine Einzelmengen veröffentlicht.",
+    "doseRecommendation": {
+      "drops": 5,
+      "foodOrDrinkMl": 200,
+      "note": "Für Lebensmittel; nicht unverdünnt verzehren."
+    },
+    "calculationPolicy": {
+      "basis": "Herstellerangabe: 0 kcal pro 5 Tropfen (gerundete Portionsangabe).",
+      "per100gNotAvailable": true,
+      "dropVolumeMlNotPublished": true,
+      "densityNotPublished": true,
+      "macroAmountsNotPublished": true,
+      "note": "Kalorien aus den grammgenau erfassten Hauptzutaten berechnen. Tropfen als gesonderten, nach Hersteller gerundeten Kleinstbeitrag ausweisen; keine Gramm-, Dichte- oder Tropfenvolumenwerte erfinden und keine exakte energiefreie Flüssigkeit pro 100 ml behaupten."
+    },
+    "preparationRestriction": "Nur in kalten oder vollständig abgekühlten Cremes, Füllungen, Glasuren oder Speisen verwenden; nicht mitbacken, anbraten oder frittieren."
+  }
+}

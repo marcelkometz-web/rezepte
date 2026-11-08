@@ -1,4 +1,4 @@
-const CACHE='rezepte-shell-v12-audit-fixes';
+const CACHE='rezepte-shell-v13-snacks';
 const BASE=new URL('./',self.location.href);
 const ASSETS=['./','./index.html','./app.js','./style.css','./recipe.css','./icon.svg','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon-32.png','./IMG_0526.png','./manifest.webmanifest','./config.json','./Read.txt','./read.html','./ei.html','./src/egg-countdown.mjs','./impressum.html'].map(p=>new URL(p,BASE).href);
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS))));

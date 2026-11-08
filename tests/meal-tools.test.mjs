@@ -18,6 +18,13 @@ test('Recipe and side quantities are scaled once with variation support',()=>{
  const rows=mealIngredients(recipe,2,{side:'kartoffeln',variation:'a'});
  assert.equal(rows[0].quantity,100);assert.equal(rows[1].quantity,300);assert.equal(rows[0].name,'Skyr natur');
 });
+test('Flavor drops scale as a count, including whole-batch shopping and plan quantities',()=>{
+ const recipe={id:5,title:'Kekse',zutaten_liste:'0,25 Tropfen IRONMAXX Flavour Drops Vanille; erst in die kalte Creme geben'};
+ const rows=mealIngredients(recipe,4),drop=rows[0];
+ assert.equal(drop.scalable,true);assert.equal(drop.quantity,1);assert.equal(drop.unit,'Tropfen');assert.match(drop.display,/^1 Tropfen IRONMAXX/);
+ const planned=recipePlanPayload(recipe,4,rows).ingredients[0];assert.equal(planned.quantity,1);assert.equal(planned.unit,'Tropfen');
+ assert.equal(mealIngredients(recipe,1)[0].quantity,.25);assert.equal(recipe.zutaten_liste.startsWith('0,25 Tropfen'),true);
+});
 test('Swaps leave original data intact and invalidate all preparation nutrition',()=>{
  const rows=mealIngredients({zutaten_liste:'100 g Skyr natur\n1 Ei'},2),option=ingredientSwapOptions(rows)[0],selected={[option.index]:option.replacement},changed=applyIngredientSwaps(rows,selected);
  assert.equal(changed[0].name,'Magerquark natur');assert.equal(changed[0].quantity,200);assert.equal(rows[0].name,'Skyr natur');
