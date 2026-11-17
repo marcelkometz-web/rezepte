@@ -5570,6 +5570,7 @@ ${y}`;
       const missingVerifier=callbackURL.searchParams.has('code')&&!sharedAuth.storage.getItem(sharedAuth.storageKey+'-code-verifier');
       Be=io(config.url,config.key,{auth:{flowType:invite?'implicit':'pkce',storageKey:sharedAuth.storageKey,storage:sharedAuth.storage,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true},global:{fetch:(input,options={})=>fetch(input,{...options,cache:'no-store',signal:options.signal||AbortSignal.timeout(20000)})}});
       sharedAuth.bind(Be);
+      window.ramonaSessionActions?.register({isSignedIn:()=>Boolean(p.user),isBusy:()=>Boolean(br||p.loading),prepare:()=>$a(),signOut:options=>sharedAuth.signOut(options)});
       const initialized=await Be.auth.initialize();
       if(missingVerifier||hash.has('error')||hash.has('error_code')||(initialized.error&&(callbackURL.searchParams.has('code')||hash.has('access_token')))){
         await Be.auth.signOut({scope:'local'});Ge=false;Ae='reset';
@@ -7238,8 +7239,9 @@ ${n}`), u.currentTarget), "button secondary"), S("Drucken / als PDF", () => Ed(t
       se(`${t.name} \xB7 ${t.variety || "Sorte"}`, o("div", { class: "catalog-plant-preview" }, o("p", { class: "pill" }, "Gemeinsamer Katalog"), o("h3", {}, t.variety || t.name), e.location ? o("p", {}, o("strong", {}, "Standort: "), e.location) : null, e.sowing ? o("p", {}, o("strong", {}, "Aussaat / Vorzucht: "), e.sowing) : null, e.harvest ? o("p", {}, o("strong", {}, "Ernte: "), e.harvest) : null, e.taste ? o("p", { class: "preserve-lines" }, o("strong", {}, "Geschmack: "), e.taste) : null, o("p", { class: "muted" }, "Nach dem Beitritt zu einem Familiengarten kannst du diese Sorte dort einem Beet zuweisen, Notizen speichern und den Anbau planen.")));
     }
     async function pr() {
+      if(window.ramonaSessionActions)return window.ramonaSessionActions.logout();
       await W(async () => {
-        await $a() && (C(await $().auth.signOut({ scope: "local" })), Ai(), ue());
+        await $a() && (C(await sharedAuth.signOut()), Ai(), ue());
       });
     }
     async function $a() {
